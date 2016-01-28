@@ -1,0 +1,41 @@
+﻿@model TEDALS_Ver01.Models.Views
+
+@{
+    ViewBag.Title = "Use View";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Views", "Index", "Views123")</li>
+    <li>Use View</li>
+</ul>
+
+<h2>Use View</h2>
+
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View all views", "Index", "Views123")</li>
+        <li>@Html.ActionLink("Add View", "Create", "Views123")</li>
+        <li>@Html.ActionLink("View all systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+<div class="col-md-10">
+    @using (Html.BeginForm("UseView", "Views123"))
+    {
+
+        <h4>Selected View : @ViewBag.ViewName</h4>
+
+        <div class="col-md-3"><br /><br />Select a System you want to View : </div>
+        <div class="col-md-5"><br /><br />@Html.ListBox("Lsystem", null, new {style="width:100%", size = @ViewBag.size })</div>
+        
+        <div class="col-md-4"><br /><br /><input type="submit" value="Submit" class="btn btn-default" onclick=""></div>
+        <input type="checkbox" name="required" value="true"/> @ViewBag.Required
+
+    }
+    <p class="col-md-3">
+        <br />
+        <br />
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+   
+</div>

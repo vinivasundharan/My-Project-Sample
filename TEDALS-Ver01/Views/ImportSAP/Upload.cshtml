@@ -1,0 +1,42 @@
+﻿@model System.Data.DataTable
+@using System.Data;
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Import SAP", "ImportSAP", "ImportSAP")</li>
+
+    <li>Upload file</li>
+</ul>
+<h2>Upload File</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Compare Systems", "CompareSystem", "ImportSAP")</li>
+        <li>@Html.ActionLink("Compare Options", "CompareOption", "ImportSAP")</li>
+        <li>@Html.ActionLink("Compare Option values", "CompareOptionValues", "ImportSAP")</li>
+        <li>@Html.ActionLink("Upload a new SAP file", "Upload", "ImportSAP")</li>
+    </ul>
+</div>
+<div class=" col-md-10">
+    <br />
+    <br />
+    @if (ViewBag.Message != null)
+    {
+        <p class="alert-danger">@ViewBag.Message</p>
+    }
+    <br />
+    <br />
+    <br />
+
+    @using (Html.BeginForm("Upload", "ImportSAP", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        <div class="form-group">
+            <input type="file" id="dataFile" name="upload"/>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Upload" class="btn btn-default" />
+        </div>
+    }

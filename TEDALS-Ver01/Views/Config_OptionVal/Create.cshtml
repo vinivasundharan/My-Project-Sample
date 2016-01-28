@@ -1,0 +1,80 @@
+﻿@model TEDALS_Ver01.Models.Config_OptionVal
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    @*<div class="form-horizontal">
+        <h4>Config_OptionVal</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+ 
+        <div class="form-group">
+            @Html.LabelFor(model => model.OptionValueID, "OptionValueID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("OptionValueID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.OptionValueID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfigurationCollectionID, "ConfigurationCollectionID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ConfigurationCollectionID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ConfigurationCollectionID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>*@
+    
+    
+    
+    <div class="form-horizontal">
+        
+        
+        <table class="table">
+            <tr>
+                <th>Option</th>
+                <th>Option Values</th>
+            </tr>
+
+                @int i = 0;
+                @foreach (var op in Model.ConfigurationCollection.Lsystem.Options)
+                {
+                    <tr>
+                        <td>@op.OptionName</td>
+                        <td>
+                            
+                            @foreach (var ov in op.OptionValues)
+                            {
+
+                            <br />
+                                Html.CheckBoxFor(model=>model[i].OptionValChecked);
+                                i++;
+
+                            }
+                        </td>
+
+                    </tr>
+                }
+                
+                
+        </table>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

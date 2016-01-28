@@ -1,0 +1,80 @@
+﻿@model List<TEDALS_Ver01.ViewModels.View_Without>
+@{
+    ViewBag.Title = "ViewsResultsWithout";
+}
+
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+    <li>Views Result Without summarize</li>
+</ul>
+
+<h2>Views Results Without Summarize</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View all views", "Index", "Views123")</li>
+        <li>@Html.ActionLink("Add View", "Create", "Views123")</li>
+        <li>@Html.ActionLink("View all systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+<div class="col-md-10">
+
+
+    <table class="table">
+        <tr>
+            <th>System Name</th>
+            @for (int i = 0; i < ViewBag.Count; i++)
+            {
+                <th>Option</th>
+                <th>Option Value</th>
+
+            }
+            @foreach (var prop in ViewBag.Property)
+            {
+                <th>@prop</th>
+            }
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Systemname</td>
+                @foreach (var opov in item.Option_Opval)
+                {
+                    <td>@opov.Option</td>
+                    <td>@opov.OptionVal</td>
+                }
+                @foreach (var p in item.PropValues)
+                {
+                    if (p == "no value")
+                    {
+                        <td class="alert-danger">@p</td>
+                    }
+                    else
+                    {
+                        <td>@p</td>
+                    }
+
+                }
+            </tr>
+        }
+    </table>
+
+    <hr />
+    @Html.ActionLink("Back to list","Index","Views123")
+</div>
+
+@section Scripts{
+    <script>
+        var seen = {};
+        $('table tr').each(function () {
+            var txt = $(this).find("td:not(:first)").text();
+
+            if (seen[txt])
+                $(this).remove();
+            else
+                seen[txt] = true;
+        });
+    </script>
+}

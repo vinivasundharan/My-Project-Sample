@@ -1,0 +1,93 @@
+﻿@model List<TEDALS_Ver01.ViewModels.Views123.ViewSummarize_FinalResult>
+@{
+    ViewBag.Title = "ViewSummarize";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+    <li>Views Result With summarize</li>
+</ul>
+
+<h2>Views Results With Summarize</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View all views", "Index", "Views123")</li>
+        <li>@Html.ActionLink("Add View", "Create", "Views123")</li>
+        <li>@Html.ActionLink("View all systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+<div class="col-md-10">
+
+    <table class="table">
+        <tr>
+            <th>System Name</th>
+            @while (ViewBag.count != 0)
+            {
+                <th>Option</th>
+                <th>Optionvalues</th>
+
+                ViewBag.count--;
+            }
+            @foreach (var p in ViewBag.reqprop)
+            {
+                <th>@p</th>
+            }
+        </tr>
+
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SystemName</td>
+                @foreach (var i in item.Op_ov_summarize)
+                {
+
+                    <td>
+                        @i.OptionName
+                    </td>
+                    <td>
+                        @foreach (var ov in i.OptionValues)
+                        {
+                            <ul><li>@ov</li></ul>
+
+                        }
+                    </td>
+
+
+                }
+                @foreach (var val in item.Values)
+                {
+                    if (val == "No value")
+                    {
+                        <td class="alert-danger">@val</td>
+                    }
+                    else
+                    {
+                        <td>@val</td>
+                    }
+
+                }
+            </tr>
+        }
+    </table>
+    <hr />
+    @Html.ActionLink("Back to list", "Index", "Views123")
+</div>
+
+
+@section Scripts{
+    <script>
+        var seen = {};
+        $('table tr').each(function () {
+            var txt = $(this).find("td:not(:first)").text();
+
+            if (seen[txt])
+                $(this).remove();
+            else
+                seen[txt] = true;
+        });
+    </script>
+}

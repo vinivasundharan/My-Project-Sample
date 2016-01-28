@@ -1,0 +1,46 @@
+﻿@model TEDALS_Ver01.ViewModels.DispalyViewsVM
+
+@{
+    ViewBag.Title = "Properties in View";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Views", "Index", "Views123")</li>
+    <li>View Properties</li>
+</ul>
+
+<h2>View Properties</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View all views", "Index", "Views123")</li>
+        <li>@Html.ActionLink("Add View", "Create", "Views123")</li>
+        <li>@Html.ActionLink("View all systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+<div class="col-md-10">
+
+    <h2> View Name : @Model.Views.ViewsName</h2>
+    <h4>Properties in the View</h4>
+    <ul>
+        @foreach (var item in Model.tcSet)
+        {
+            <li>@item.SetName</li>
+        }
+    </ul>
+
+    <h4>Calculations in the View</h4>
+    <ul>
+        @foreach (var item in Model.Calculation)
+        {
+            <li>@item.CalculationName</li>
+        }
+            
+    </ul>
+
+
+    @Html.ActionLink("Back to List", "Index")
+    <br />
+    @Html.ActionLink("Use View", "UseView", "Views123", new { id=@ViewBag.id},null)
+</div>

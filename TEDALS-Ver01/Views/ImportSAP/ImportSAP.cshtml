@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "ImportSAP";
+}
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+    <li>SAP functions</li>
+</ul>
+<h2>SAP Functions</h2>
+<br />
+<br />
+<br />
+<br />
+@*<div class=" col-md-5"></div>*@
+<div class="col-md-3" style="background-color:#7A96AD">
+    <ul class="nav navbar-nav" style="color:white">
+        <li id="sap">@Html.ActionLink("Compare Systems", "CompareSystem", "ImportSAP")</li>
+    </ul>
+</div>
+<div class="col-md-3" style="background-color:#7A96AD">
+    <ul class="nav navbar-nav">
+        <li id="sap">@Html.ActionLink("Compare Options", "CompareOption", "ImportSAP")</li>
+    </ul>
+</div>
+<div class="col-md-3" style="background-color:#7A96AD">
+    <ul class="nav navbar-nav" style="color:white">
+        <li id="sap">@Html.ActionLink("Compare Option values", "CompareOptionValues", "ImportSAP")</li>
+    </ul>
+</div>
+<div class="col-md-3" style="background-color:#7A96AD">
+    <ul class="nav navbar-nav" style="color:white">
+        <li id="sap">@Html.ActionLink("Upload a new SAP file", "Upload", "ImportSAP")</li>
+    </ul>
+</div>
+   
+
+
+

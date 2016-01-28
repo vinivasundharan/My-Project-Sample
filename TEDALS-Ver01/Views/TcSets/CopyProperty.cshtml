@@ -1,0 +1,87 @@
+﻿@model TEDALS_Ver01.Models.TechnicalCharacteristic
+@{
+    ViewBag.Title = "CopyProperty";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home","Index","Home")</li>
+    <li>@Html.ActionLink("Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+
+    <li>Copy Properties</li>
+</ul>
+<h2>Copy Property</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("Add New Technical Characteristics", "Create", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("View Data Formats", "Index", "DataFormats")</li>
+        <li>@Html.ActionLink("Add new Data Formats", "Create", "DataFormats")</li>
+    </ul>
+</div>
+<div class=" col-md-10">
+
+
+
+    <h4>Technical Characteristic :  @Model.TCName</h4>
+
+    <h4>Available properties</h4>
+    @*@using(Html.BeginForm("CopyProperty","TcSets",Model))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-12">
+            @foreach (var item in ViewBag.TC)
+            {
+                <div class="col-md-3">
+                    <input type="checkbox" value="@item.TechnicalCharacteristicID" name="tcid" />  @item.TCName
+                </div>
+            }
+
+        </div>
+
+        <div class="col-md-12" style="clear:both">
+            <br />
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    }*@
+
+    @using (Html.BeginForm("CopyProperty", "TcSets", Model))
+    {
+        //@Html.HiddenFor(model => model.TechnicalCharacteristicID)
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>Property Name</th>
+                <th>Technical Characteristic</th>
+                <th>Physical Unit</th>
+                <th>Data Format</th>
+                <th>Data usage</th>
+                <th>Data Status</th>
+                <th>Description DE</th>
+                <th>Description EN</th>
+            </tr>
+
+
+            @foreach (var item in ViewBag.TcSet)
+            {
+
+                <tr>
+                    <td><input type="checkbox" value="@item.TcSetID" name="setid" /></td>
+                    <td>@item.SetName</td>
+                    <td>@item.TechnicalCharacteristic.TCName</td>
+                    <td>@item.PhysicalUnit</td>
+                    <td>@item.DataFormat.FormatName</td>
+                    <td>@item.DataUsage</td>
+                    <td>@item.DataStatus</td>
+                    <td>@item.DescriptionDE</td>
+                    <td>@item.DescriptionEN</td>
+                </tr>
+                
+
+            }
+        </table>
+        <div class="col-md-offset-8 col-md-4">
+            <br /><br />
+            <input type="submit" value="Copy" class="btn btn-default" />
+        </div>
+    }
+</div>

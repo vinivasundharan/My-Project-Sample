@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "TeDaLs Home Page";
+}
+
+
+<div>
+    <h4>Welcome! @ViewBag.UserName</h4>
+    <br />
+    <br />
+
+    <h2 align="center">TeDaLs :  Technical Data for Linear Systems</h2>
+    <br />
+    <br />
+    <p style="background-color:#d3e7f2;color:#255C89; font-size:larger" align="justify">
+        <b>
+            TeDaLs (Technical Data for Linear Systems) is an intranet web application which is used to store data of linear systems in a systematic and user friendly way. Apart from storing the linear system data in the database, it also provides features to View the data in different ways, export the whole data into a XML file, compare existing Linear system data from SAP with the data in the database and also perform calculations with the data.
+        </b>
+    </p>
+</div>
+
+    <br />
+<br />
+    <h4>You have the following access rights</h4>
+<div style="background-color:white">
+    @foreach (var item in ViewBag.rights)
+    {
+
+        <div class="col-md-3" style="background-color:#255C89"><b style="color:#255C89 "><mark style="background-color:#255C89; color:white; font-size:larger">@item</mark></b></div>
+    }
+</div>
+
+

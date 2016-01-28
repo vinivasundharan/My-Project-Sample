@@ -1,0 +1,25 @@
+﻿@model TEDALS_Ver01.Models.ConfigurationCollection
+
+Lsystem Name : @Model.Lsystem.LsystemName
+<table class="table">
+    @*<tr>
+        @foreach(var op in Model.Lsystem.Options)
+        {
+            <td>@op.OptionName</td>
+        }
+    </tr>*@
+    
+    
+        
+        @foreach (var ov in Model.Lsystem.Options)
+        {
+            <tr>
+                <td><b>@ov.OptionName</b></td>
+                @foreach (var x in ov.OptionValues)
+                {
+                   <td>@x.OptionVal</td>
+                }
+            </tr>
+        }
+          
+</table>

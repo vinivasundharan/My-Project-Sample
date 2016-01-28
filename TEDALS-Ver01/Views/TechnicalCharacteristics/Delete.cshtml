@@ -1,0 +1,96 @@
+﻿@model TEDALS_Ver01.Models.TechnicalCharacteristic
+
+@{
+    ViewBag.Title = "Delete Technical Characteristic";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+    <li>Delete Technical Characteristics</li>
+</ul>
+<h2>Delete</h2>
+
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("Add New Technical Characteristics", "Create", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("View Data Formats", "Index", "DataFormats")</li>
+        <li>@Html.ActionLink("Add new Data Formats", "Create", "DataFormats")</li>
+    </ul>
+</div>
+<div class="col-md-10">
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>TechnicalCharacteristic</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TCName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TCName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DescriptionEN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DescriptionEN)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DescriptionDE)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DescriptionDE)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedBy)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</div>

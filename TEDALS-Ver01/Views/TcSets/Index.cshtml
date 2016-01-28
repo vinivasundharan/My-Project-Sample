@@ -1,0 +1,73 @@
+﻿@model IEnumerable<TEDALS_Ver01.Models.TcSet>
+
+@{
+    ViewBag.Title = "TC Property";
+}
+
+<h2>All Technical Characteristic Properties</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("Add New Technical Characteristics", "Create", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("View Data Formats", "Index", "DataFormats")</li>
+        <li>@Html.ActionLink("Add new Data Formats", "Create", "DataFormats")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SetName)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.TechnicalCharacteristic.TCName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataFormat.FormatName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhysicalUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataUsage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataStatus)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SetName)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.TechnicalCharacteristic.TCName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataFormat.FormatName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhysicalUnit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataUsage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataStatus)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TcSetID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.TcSetID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TcSetID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

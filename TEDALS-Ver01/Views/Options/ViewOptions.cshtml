@@ -1,0 +1,103 @@
+﻿@model TEDALS_Ver01.ViewModels.Lsystem_Option
+
+@{
+    ViewBag.Title = "View Options";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>@Html.ActionLink("Systems","Index","Lsystems")</li>
+    <li>View Options</li>
+</ul>
+
+<h2>View Options</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+        <li>@Html.ActionLink("View System Independent Options", "ViewOptions", "Options", new {id=1038 },null)</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <h4>Family Name : @ViewBag.FamilyName</h4>
+    <h4>System name : @ViewBag.Lsystem</h4>
+
+    <table class="table">
+        <tr>
+            <th>Option Name</th>
+            <th>Technical Characteristic</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.Options)
+        {
+            <tr>
+                <td data-toggle="tooltip" title="@item.DescriptionDE">@Html.ActionLink(item.OptionName, "ViewOptionValues", "OptionValues", new { id = item.OptionID }, null)</td>
+                <td>@Html.ActionLink(@item.TechnicalCharacteristic.TCName, "ViewTcSet", "TechnicalCharacteristics", new {id = item.TechnicalCharacteristicID },null)</td>
+                <td>
+                    <a href="#" class="view" data-id="@item.OptionID">View Properties</a> |
+                   @* @Ajax.ActionLink("View Properties", "ViewOptionvalues", "Options", new { id = item.OptionID }, new AjaxOptions { UpdateTargetId="ViewProperty"})|*@
+                    @*@Html.ActionLink("View OptionValues", "ViewOptionValues", "OptionValues", new { id= item.OptionID},null)|*@
+                    @*@Html.ActionLink("Add option Values", "Create", "OptionValues", new { OptionID = item.OptionID }, null)|*@
+                    @Html.ActionLink("Edit", "Edit", new { id = item.OptionID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.OptionID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.OptionID })
+                </td>
+            </tr>
+            <tr style="display:none;overflow-x:auto"><td  colspan="3"><div style="overflow:auto"></div></td></tr>
+    
+
+
+        }
+    </table>
+
+    @*<div id="ViewProperty" style="animation-fill-mode:backwards"></div>*@
+    <hr />
+    @Html.ActionLink("Add Option", "Create", "Options", new { id = ViewBag.id},null)
+    <br />
+    @Html.ActionLink("Back to List", "ViewSystems", "LsystemFamilies", new { id =ViewBag.FamID},null)
+</div>
+@section Scripts{
+    @*<script type="text/javascript">
+    $(document).ready(function () {
+        $('.links').click(function () {
+            $(this).closest('tr').next('tr').toggle();
+
+        });
+    });
+    </script>*@
+
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+            $("button").click(function () {
+                var url1 = '@Url.Action("ViewOptionValues","Options")';
+                var urlid = $("button").val();
+                $.ajax({
+                    url: '@Url.Action("ViewOptionValues","Options")',
+                    data: { id: urlid },
+                    success: successFunc
+                });
+                function successFunc() {
+                    $(this).closest('tr').next('tr').toggle();
+                }
+
+            })
+        });
+    </script>*@
+    <script>
+        var url = '@Url.Action("ViewOptionvalues", "Options")';
+        $('.view').click(function () {
+            var nextRow = $(this).closest('tr').next('tr');
+            $.get(url, { id: $(this).data('id') }, function (response) {
+                nextRow.find('div').html(response);
+                nextRow.toggle();
+            });
+        })
+    </script>
+    
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

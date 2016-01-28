@@ -1,0 +1,63 @@
+﻿@model List<TEDALS_Ver01.Models.SetValue>
+@{
+    ViewBag.Title = "Calculate";
+}
+<h2>Calculate @ViewBag.CalcName</h2>
+<div class="col-md-12">
+    @using (Html.BeginForm())
+    {
+        <p>
+            Length @Html.TextBox("Length")
+            <input type="submit" class="btn btn-default" value="Submit" />
+        </p>
+    }
+    
+    
+    @if (ViewBag.Message == null)
+    {
+
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    Property
+                </th>
+                <th>
+                    Value
+                </th>
+            </tr>
+            @foreach (var item in Model.Distinct())
+            {
+                <tr>
+                    <td>
+                        @item.TcSet.SetName
+                    </td>
+                    <td>
+                        @item.Value
+                    </td>
+                </tr>
+            }
+            <tr>
+                <th>
+                    @ViewBag.CalcName
+                </th>
+                <th>
+                    @ViewBag.ans
+                </th>
+            </tr>
+        </table>
+
+    }
+    else
+    {   
+        <hr />
+        <p class="alert-danger">This calculation requires a value  for LENGTH. Please enter a value for Length</p>
+    }
+    @if(ViewBag.error!=null)
+    {
+        <hr />
+        <p class="alert-danger">Some invalid parameters found for Calculation. Check the values of the Properties and/or the length</p>
+    }
+    @Html.ActionLink("Back to List", "ViewCalculations1", "Calculations", new { id= ViewBag.id},null)
+</div>

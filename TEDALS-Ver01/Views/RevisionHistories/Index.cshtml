@@ -1,0 +1,243 @@
+﻿@model IEnumerable<TEDALS_Ver01.Models.RevisionHistory>
+@{
+    ViewBag.Title = "Revision History";
+}
+@*<head>
+    <style>
+        table {
+            /*border-collapse: collapse;*/
+            table-layout: fixed;
+            /*width: 700px;*/
+        }
+
+            table th {   
+                max-width : 300px;
+                min-width : 200px;           
+                word-wrap: break-word;
+            }
+    </style>
+</head>*@
+<head>
+    @Styles.Render("~/Content/themes/base/css", "~/Content/css", "~/Content/datepicker3.css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @*@Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")*@
+    @Scripts.Render("~/Content/bootstrap-datepicker.js")
+    <style>
+        #revtable{
+            table-layout:fixed;
+            width:1500px;
+            max-width:1400px;
+
+        }
+        #revtable th,td{
+            width:120px;
+            word-wrap :break-word;
+            
+        }
+
+    </style>
+    @*<script type="text/javascript" src="JS/jquery-1.10.2.min.js"></script>
+    <link href="DatePicker/bootstrap-datepicker.css" rel="stylesheet" />
+    <script src="DatePicker/bootstrap-datepicker.js"></script>
+    <script>
+    $(document).ready(function () {
+        $(".datepicker").datepicker({ format: 'dd/mm/yyyy', autoclose: true, todayBtn: 'linked' })
+    });
+    </script>*@
+        @*<script src="~/Scripts/jquery-ui-1.11.4.js"></script>
+            <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#from').datepicker();
+        <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+
+                    $('#from').focus(function () {
+                        $('#from').datepicker('show');
+                    });
+
+                    $('#from').click(function () {
+                        $('#from').datepicker('show');
+                    });
+                    //$('#ui-datepicker-div').show();
+                    $('#from').datepicker('show');
+                });
+            </script>*@
+</head>
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home","Index","Home")</li>
+    <li>Revision History</li>
+</ul>
+<h2>Revision History</h2>
+@*<div class="col-md-4">
+    @using (Html.BeginForm())
+    {
+    <p>
+        Search @Html.TextBox("Property")
+        <input type="submit" class="btn btn-default" value="Search" />
+    </p>
+    }
+</div>*@
+@using (Html.BeginForm())
+{ 
+<table class="table" id="revtable">
+    <thead>
+        <tr>
+            <th>
+                Action
+            </th>
+            <th>
+                System Name
+                @* @Html.TextBox("SystemName",null, new { @class ="form-control"})*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Option)*@
+                Option
+                @*@Html.TextBox("Option", null, new { @class = "form-control" })*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Optionvalue)*@
+                Option Value
+                @* @Html.TextBox("OptionValue", null, new { @class = "form-control" })*@
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.TCSetName)*@
+                Property
+                @* @Html.TextBox("TCSetName", null, new { @class = "form-control" })*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.InitialValue)*@
+                Initial Value
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.ModifiedValue)*@
+                Modified Value
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.CreatedOn)*@
+                Created On
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.ModifiedOn)*@
+                Modified On
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.ModifiedBy)*@
+                Modified By
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>
+                <select class="form-control" id="Action12" name="Action12">
+                        <option value="">Select Action</option>
+                        <option value="1" class="alert-success">Created</option>   
+                        <option value="2"class="alert-warning">Modified</option>
+                        <option value="3" class="alert-danger">Deleted</option>
+               </select>
+            </th>
+            <th>@Html.TextBox("SystemName", null, new { @class = "form-control" })</th>
+            <th>@Html.TextBox("Option", null, new { @class = "form-control" })</th>
+            <th> @Html.TextBox("OptionValue", null, new { @class = "form-control" })</th>
+            <th> @Html.TextBox("TCSetName", null, new { @class = "form-control" })</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>
+                @*<input class="date-picker" />
+               <input type="text"  name="from" class="date-picker"/>*@
+                <p>
+                    From : <input type="text" name="from"  id="from"/>
+                    <br />
+                    To : <input type="text" name="to" id="to"/>
+                </p>
+               
+            </th>
+            <th></th>
+            <th>
+                <input type="submit" class="btn btn-default" value="Search" />
+            </th>
+        </tr>
+    </thead>
+@foreach (var item in Model) {
+    <tr>
+        @if (item.Action == "Created")
+        {
+            <td style="background-color:lightgreen">
+                @Html.DisplayFor(modelItem => item.Action)
+            </td>
+        }
+        else if(item.Action=="Modified")
+        {
+            <td style="background-color : yellow">
+                @Html.DisplayFor(modelItem => item.Action)
+            </td>
+        }
+        else if (item.Action == "Deleted")
+        {
+            <td style="background-color:palevioletred">
+                @Html.DisplayFor(modelItem => item.Action)
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Action)
+            </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.SystemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Option)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Optionvalue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TCSetName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InitialValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+    </tr>
+}
+
+</table>
+}
+
+@*<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, Page_No => Url.Action("Index",
+    new { Page_No }))*@ 
+
+
+@*<script>
+    $(function () {
+        $("#from").datepicker();
+        $("#date").datepicker
+        ({
+            dateFormat: "dd-mm-yyyy"
+        });
+    });
+</script>*@
+
+
+<script>
+    $(document).ready(function () {
+        $('#from, #to').datepicker({dateFormat:"dd-mm-yy"});
+    });
+</script>

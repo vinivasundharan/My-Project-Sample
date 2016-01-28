@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TEDALS_Ver01.Models.Option>
+
+@{
+    ViewBag.Title = "Options";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>@Html.ActionLink("Systems", "Index", "Lsystems")</li>
+    <li>All Options</li>
+</ul>
+
+<h2>Option List</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+        <li>@Html.ActionLink("View System Independent Option", "ViewOptions", "Options", new { id = 1038 }, null)</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Lsystem.LsystemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OptionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TechnicalCharacteristic.TCName)
+            </th>
+           
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td data-toggle="tooltip" title="@item.DescriptionDE">
+                    @Html.DisplayFor(modelItem => item.Lsystem.LsystemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OptionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TechnicalCharacteristic.TCName)
+                </td>
+               
+                <td>
+                    @Html.ActionLink("View Option Values", "ViewOptionValues", "OptionValues", new { id = item.OptionID},null) | 
+                    @Html.ActionLink("Edit", "Edit", new { id = item.OptionID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.OptionID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.OptionID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

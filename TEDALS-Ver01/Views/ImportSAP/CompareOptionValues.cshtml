@@ -1,0 +1,138 @@
+﻿@model List<TEDALS_Ver01.ViewModels.ImportSAP.OptionValueSAP>
+@{
+    ViewBag.Title = "CompareOptionValues";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Import SAP", "ImportSAP", "ImportSAP")</li>
+    
+    <li>Compare option Values</li>
+</ul>
+<h2>CompareOptionValues</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Compare Systems", "CompareSystem", "ImportSAP")</li>
+        <li>@Html.ActionLink("Compare Options", "CompareOption", "ImportSAP")</li>
+        <li>@Html.ActionLink("Compare Option values", "CompareOptionValues", "ImportSAP")</li>
+        <li>@Html.ActionLink("Upload a new SAP file", "Upload", "ImportSAP")</li>
+    </ul>
+</div>
+<div class=" col-md-10">
+    @using (Html.BeginForm("CompareOptionValues", "ImportSAP"))
+    {
+        <div class="col-md-10">
+
+            @foreach (var item in ViewBag.SystemFilter)
+            {
+                <div class="col-md-3">
+                    <input type="checkbox" value="@item.LsystemID" name="id" />@item.LsystemName
+
+                </div>
+            }
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Filter" class=" btn btn-default" />
+                </div>
+            </div>
+            
+        </div>
+
+    }
+    <div class="col-md-10">
+
+
+        @if (Model != null)
+        {
+
+            <h4>Data Only in SAP Export FIle</h4>
+            <table class="table">
+                <tr>
+                    <th>System Name</th>
+                    <th>Material Number</th>
+                    <th>Option Name</th>
+                    <th>Option Value</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    foreach (var s in item.s_d_mismatch)
+                    {
+                        <tr>
+                            <td>@s.SystemName</td>
+                            <td>@s.MaterialNo</td>
+                            <td>@s.OptionName</td>
+                            <td>@s.Optionval</td>
+                            <td>@s.Description</td>
+                            @if (s.OptionID != 0)
+                            {
+                                <td>@Html.ActionLink("Create", "OptionValueCreate", "ImportSAP", new {OptionValue=s.Optionval, opid = s.OptionID,desc=s.Description }, null)</td>
+                            }
+                            else
+                            {
+                                <td>@Html.ActionLink("Option does not exist", "OptionCreate", "ImportSAP", new { OptionName = s.OptionName, lsysid = s.SystemID }, null)</td>
+                            }
+
+                        </tr>
+                    }
+                }
+            </table>
+
+            <h4>Data Only in TeDaLs</h4>
+            <table class="table">
+                <tr>
+                    <th>System Name</th>
+                    <th>Material Number</th>
+                    <th>Option Name</th>
+                    <th>Option Value</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    foreach (var s in item.d_s_mismatch)
+                    {
+                        <tr>
+                            <td>@s.SystemName</td>
+                            <td>@s.MaterialNo</td>
+                            <td>@s.OptionName</td>
+                            <td>@s.Optionval</td>
+                            <td>@s.Description</td>
+                            <td>@Html.ActionLink("Edit", "Edit", "OptionValues", new { id = s.OptionValID }, null) |  @Html.ActionLink("Delete", "Delete", "OptionValues", new { id = s.OptionValID }, null)</td>
+                        </tr>
+                    }
+                }
+            </table>
+
+            <h4>Data in TeDaLs and SAP Export File</h4>
+            <table class="table">
+                <tr>
+                    <th>System Name</th>
+                    <th>Material Number</th>
+                    <th>Option Name</th>
+                    <th>Option Value</th>
+                    <th>Description SAP</th>
+                    <th>Description DB</th>
+
+                </tr>
+                @foreach (var item in Model)
+                {
+                    foreach (var s in item.d_s_match)
+                    {
+                        <tr>
+                            <td>@s.SystemName</td>
+                            <td>@s.MaterialNo</td>
+                            <td>@s.OptionName</td>
+                            <td>@s.Optionval</td>
+                            <td>@s.DescriptionSAP</td>
+                            <td>@s.DescriptionDB</td>
+                        </tr>
+                    }
+                }
+            </table>
+
+        }
+    </div>
+</div>

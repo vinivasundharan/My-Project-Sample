@@ -1,0 +1,81 @@
+﻿@model TEDALS_Ver01.ViewModels.ViewsResult_Complete
+@{
+    ViewBag.Title = "ViewsResult";
+}
+
+<h2>Views Result</h2>
+<div class="col-md-12">
+    <h4>Selected Systems</h4>
+    @foreach (var item in ViewBag.SystemName)
+    {
+        <div class="col-md-4">
+            @item
+            <br />
+        </div>
+    }
+</div>
+<br /><br />
+<div class="col-md-12">
+    <h4>Configurations Used</h4>
+    <table class="table">
+        <tr>
+            <th>Configuration Name</th>
+            @foreach(var op in ViewBag.OptionName)
+            {
+                <th>@op</th>
+            }
+        </tr>
+        @foreach(var item in Model.ConfigCombi)
+        {
+            foreach (var l in item)
+            {
+            <tr>
+                <td>@l.ConfigurationName</td>
+                @foreach (var o in l.OptionValues)
+                {
+                    <td>@o.Item1</td>
+                }
+            </tr>
+            }
+        }
+    </table>
+
+    @*<tr>
+            <th>Configuration Name</th>
+            @foreach(var item in Model.ConfigCombi[0])
+            {
+                foreach(var l in item.OptionValues)
+                {
+                    <th>@l.Item2</th>
+                }
+            }
+        </tr>*@
+
+ 
+
+</div>
+<br /><br />
+<div class=" col-md-12">
+    <h4>Result</h4>
+    <table class="table">
+        <tr>
+            @foreach (var item in Model.ViewsResult.reqprop)
+            {
+                <th>@item</th>
+            }
+        </tr>
+
+        @foreach (var item in Model.ViewsResult.allrow)
+        {
+            <tr>
+                @foreach (var i in item)
+                {
+                    <td>@i</td>
+                }
+
+            </tr>
+
+        }
+
+    </table>
+</div>

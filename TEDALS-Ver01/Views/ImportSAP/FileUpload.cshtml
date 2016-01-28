@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "FileUpload";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    
+    <li>Import SAP characteristics</li>
+</ul>
+
+<h2>File Upload</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Compare Value", "Compare", "ImportSAP")</li>
+        
+    </ul>
+</div>
+<div class="col-md-10">
+
+    @using (Html.BeginForm("Upload", "ImportSAP", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <input type="file" name="dataFile" />
+        <input type="submit" value="OK" />
+    }
+</div>

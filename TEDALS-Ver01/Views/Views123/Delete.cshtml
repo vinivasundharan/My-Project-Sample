@@ -1,0 +1,64 @@
+﻿@model TEDALS_Ver01.Models.Views
+
+@{
+    ViewBag.Title = "Delete";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Views", "Index", "Views123")</li>
+    <li>Delete View</li>
+</ul>
+
+<h2>Delete View</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View all views", "Index", "Views123")</li>
+        <li>@Html.ActionLink("Add View", "Create", "Views123")</li>
+        <li>@Html.ActionLink("View all systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+<div class="col-md-10">
+
+        <h3>Are you sure you want to delete this?</h3>
+        <div>
+            <h4>Views</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ViewsName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ViewsName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DescriptionEN)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DescriptionEN)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DescriptionDE)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DescriptionDE)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            }
+        </div>
+</div>

@@ -1,0 +1,168 @@
+﻿@model List<TEDALS_Ver01.ViewModels.ListAllConfiguration>
+@{
+    ViewBag.Title = "View all Configurations";
+}
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Configurations", "Index", "ConfigurationCollections")</li>
+    <li>View all Configuration</li>
+</ul>
+
+<h2>All Configurations</h2>
+
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("View all Configuration", "Index", "ConfigurationCollections")</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+        
+    </ul>
+    <div  id="expandall" style="color:#6d90aa"><a>Expand all</a></div>
+    <div  id="collapseall" style="color:#6d90aa"><a>Collapse all</a></div>
+</div>
+
+<div class="col-md-10" id="main">
+    <h4>Family Name : @ViewBag.FamilyName</h4>
+    <h4>System Name : @ViewBag.LsystemName</h4>
+    
+   
+        
+        @*<div class="col-md-3">
+            <div class="ConfigName">
+                <h6><b>@item.ConfigurationCollection.CollectionName</b></h6>
+                @Html.ActionLink("Edit", "Edit", "ConfigurationCollections", new { id = item.ConfigurationCollection.ConfigurationCollectionID }, null) |
+                @Html.ActionLink("Delete", "Delete", "ConfigurationCollections", new { id = item.ConfigurationCollection.ConfigurationCollectionID }, null) |
+                @Html.ActionLink("Details", "Details", "ConfigurationCollections", new { id = item.ConfigurationCollection.ConfigurationCollectionID }, null)
+            </div>
+        </div>*@
+    <div class="col-md-10">
+        <table  class="table">
+            
+            @foreach (var item in Model)
+            {
+                int i = 0,k=0;
+                bool first = true;
+                
+                var optionlist = new List<String>();
+               foreach (var lis in ViewBag.Option)
+               {
+                   optionlist.Add(lis.OptionName);
+               }
+
+               optionlist.OrderBy(q => q).ToList();
+                @*<tr>
+                    <th>
+                        <div class="ConfgName">@item.ConfigurationCollection.CollectionName</div>
+                    </th>
+                </tr>*@
+                <thead>
+                    <tr>
+                        @if (ViewBag.count == 0)
+                        {
+
+                            ViewBag.count = 1;
+                            <th  width="200">Configuration Name</th>
+                            foreach (var lis in optionlist)
+                            {
+
+                                <th >@lis</th>
+                                
+                            }
+                            <th></th>
+                        }
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td  width="200">@item.ConfigurationCollection.CollectionName</td>
+                        
+                        @foreach (var lis in optionlist)
+                        {
+                            first=true;
+                            if(k>=item.ListConfiguration.Count())
+                            {
+                                <td>No value</td>       
+                            }
+                            else if (item.ListConfiguration[k].Option.OptionName != lis)
+                            {
+                                
+                                    <td>No value</td>
+
+                            }
+
+                            else
+                            {
+                                <td>
+
+                                    @foreach (var ov in item.ListConfiguration[k].OptionValue)
+                                    {
+
+                                    <p>
+                                        @ov.OptionVal
+                                        - @ov.DescriptionDE
+                                    </p>
+                                    <br />
+                                    }
+                                </td>
+
+                                if (first)
+                                {
+                                    k++;
+                                    first = false;
+                                }
+
+                            }
+
+
+                        }
+                       
+                        <td>@Html.ActionLink("Edit", "Edit", new { id = item.ConfigurationCollection.ConfigurationCollectionID })</td>
+                    </tr>
+                </tbody>
+
+
+
+
+            }
+        </table>
+    </div>
+    <div class="col-md-10">
+        <p>
+            <hr />
+
+            @Html.ActionLink("Add new Configuration", "Create", "ConfigurationCollections", new { LsystemID = @ViewBag.LsystemID }, null)
+            <br />
+            @Html.ActionLink("Back to List", "ViewSystems", "LsystemFamilies", new { id = @ViewBag.LsystemFamilyID }, null)
+        </p>
+    </div>
+</div>
+
+@*@section Scripts{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('.ConfigName').click(function () {
+            //$('#ConfigDetails').slideToggle();
+            $(this).next().slideToggle();
+            //var closest = $(this).closest().find('.ConfigDetails').is(":visible");
+            //if(!closest)
+            //{
+            //    $(this).find('.ConfigDetails').slideToggle();
+            //}
+
+        });
+    });
+    $(document).ready(function () {
+        $('#expandall').click(function () {
+            $('.ConfigDetails').slideDown();
+        });
+    });
+    $(document).ready(function () {
+        $('#collapseall').click(function () {
+            $('.ConfigDetails').slideUp();
+        });
+    });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+}*@

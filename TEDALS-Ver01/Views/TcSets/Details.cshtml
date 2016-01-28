@@ -1,0 +1,124 @@
+﻿@model TEDALS_Ver01.Models.TcSet
+
+@{
+    ViewBag.Title = "TC Property Details";
+}
+
+<h2>Details</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("Add New Technical Characteristics", "Create", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("View Data Formats", "Index", "DataFormats")</li>
+        <li>@Html.ActionLink("Add new Data Formats", "Create", "DataFormats")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <div>
+        <h4>TcSet</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DataFormat.FormatName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DataFormat.FormatName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TechnicalCharacteristic.TCName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TechnicalCharacteristic.TCName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SetName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SetName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PhysicalUnit)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PhysicalUnit)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DataUsage)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DataUsage)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DataStatus)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DataStatus)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DescriptionDE)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DescriptionDE)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DescriptionEN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DescriptionEN)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedBy)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.TcSetID }) |
+        @Html.ActionLink("Back to List", "ViewTCset", "TechnicalCharacteristics", new { id = Model.TechnicalCharacteristicID }, null)
+    </p>
+</div>

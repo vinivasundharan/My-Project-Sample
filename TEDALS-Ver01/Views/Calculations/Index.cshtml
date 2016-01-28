@@ -1,0 +1,73 @@
+﻿@model IEnumerable<TEDALS_Ver01.Models.Calculation>
+
+@{
+    ViewBag.Title = "Index";
+}
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home","Index","Home")</li>
+    <li>Calculations</li>
+</ul>
+<h2>Calculations</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View Calculations", "Index", "Calculations")</li>
+        <li>@Html.ActionLink("Add New Calculation", "Create", "Calculations")</li>
+        <li>@Html.ActionLink("View Data Formats", "Index", "DataFormats")</li>
+    </ul>
+</div>
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<div class="col-md-10">
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CalculationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CalculationFormula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhysicalUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataFormat.FormatName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataStatus)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td data-toggle="tooltip" title="@item.DescriptionDE">
+                    @Html.DisplayFor(modelItem => item.CalculationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CalculationFormula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhysicalUnit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataFormat.FormatName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataStatus)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CalculationID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CalculationID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CalculationID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

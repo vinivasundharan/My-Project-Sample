@@ -1,0 +1,68 @@
+﻿@model List<TEDALS_Ver01.Models.Calculation>
+@{
+    ViewBag.Title="Available Calculations";
+}
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Calculations", "Index", "Calculations")</li>
+    <li>View Calculation</li>
+</ul>
+<h2>Available Calculations</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View Calculations", "Index", "Calculations")</li>
+        <li>@Html.ActionLink("Add New Calculation", "Create", "Calculations")</li>
+        <li>@Html.ActionLink("View Data Formats", "Index", "DataFormats")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    
+
+    <table class="table">
+        <tr>
+            <th>
+                Calculation Name
+            </th>
+            <th>
+                Calculation Formula
+            </th>
+            <th>
+                Physical Unit
+            </th>
+            <th>
+                Data Status
+            </th>
+            <th>
+                Data Format
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @item.CalculationName
+                </td>
+                <td>
+                    @item.CalculationFormula
+                </td>
+                <td>
+                    @item.PhysicalUnit
+                </td>
+                <td>
+                    @item.DataStatus
+                </td>
+                <td>
+                    @item.DataFormat.FormatName
+                </td>
+                <td>@Html.ActionLink("Calculate", "Calculate1", "Calculations", new { calcID = @item.CalculationID, LsystemID = @ViewBag.LsystemID }, null)</td>
+            </tr>
+        }
+    </table>
+    <p>
+        @Html.ActionLink("Back to List", "ViewSystems", "LsystemFamilies", new { id=@ViewBag.LsystemFamilyID},null)
+    </p>
+</div>

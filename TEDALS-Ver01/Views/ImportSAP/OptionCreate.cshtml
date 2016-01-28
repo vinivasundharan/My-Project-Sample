@@ -1,0 +1,92 @@
+﻿@model TEDALS_Ver01.Models.Option
+
+@{
+    ViewBag.Title = "Create Option";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>@Html.ActionLink("Systems", "Index", "Lsystems")</li>
+    <li>Add Option</li>
+</ul>
+
+<h2>Add option</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+        <li>@Html.ActionLink("View System Independent Option", "ViewOptions", "Options", new { id = 1038 }, null)</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+@if (ViewBag.Message != null)
+{
+    <h4 style="text-decoration-color:red"><mark>@ViewBag.Message</mark></h4>
+}
+
+
+<div class="col-md-10">
+    <h4>Family Name : @ViewBag.FamilyName</h4>
+    <h4>System Name : @ViewBag.Lsystem</h4>
+
+    @if (ViewBag.Message == null)
+    {
+
+
+        using (Html.BeginForm("Create","Options"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.LsystemID)
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OptionName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OptionName, new { htmlAttributes = new { @class = "form-control" }, autofocus = "autofocus" })
+                        @Html.ValidationMessageFor(model => model.OptionName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DescriptionEN, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DescriptionEN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionEN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DescriptionDE, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DescriptionDE, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionDE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TechnicalCharacteristicID, "TechnicalCharacteristicID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("TechnicalCharacteristicID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TechnicalCharacteristicID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <div>
+        @Html.ActionLink("Back to List", "CompareOption", "ImportSAP")
+    </div>
+</div>
+<hr />
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

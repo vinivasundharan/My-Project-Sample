@@ -1,0 +1,109 @@
+﻿@model IEnumerable<TEDALS_Ver01.Models.SetValue>
+@{
+    ViewBag.Title = "Property Values";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>@Html.ActionLink("Systems", "Index", "Lsystems")</li>
+    <li>@Html.ActionLink("Options", "Index", "Options")</li>
+    <li>@Html.ActionLink("Option Values", "Index","OptionValues")</li>
+    <li>System Properties</li>
+</ul>
+
+<h2>System properties</h2>
+<h4>Family Name : @ViewBag.FamilyName</h4>
+<h4>System name : @ViewBag.Lsystem</h4>
+<h4>Option : @ViewBag.Option</h4>
+<h4>Option Value : @ViewBag.OptionValue</h4>
+<div>
+    
+    @using (Html.BeginForm("Copy","SetValues",FormMethod.Post))
+    {
+        <div class="col-md-12">
+            <div class="col-md-3"><b>Select an Option Value to copy the property values:</b></div>
+            
+            <div class="col-md-3">@Html.DropDownList("CopyID", null, "Select", htmlAttributes: new { @class="form-control"})</div>
+           
+            <input type="hidden" name="OptionValueID" value="@ViewBag.OptionvalID" />
+            <div class="col-md-6">
+                <button type="submit" id="Copy" class="btn btn-default"> Copy </button>
+            </div>
+            @*@Html.ActionLink("Copy", "Copy", "SetValues", new { @OptionValueID = @ViewBag.id,@CopyID = CopyDDL.SelectedValue},null)*@
+            @*@Html.DropDownList("OptionID", null, htmlAttributes: new { @class = "form-control" })*@
+        </div>
+    }
+    
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TcSet.SetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>*@
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TcSet.SetName)
+                </td>
+               
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Value)*@
+                    @item.Value @item.TcSet.PhysicalUnit
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SetValueID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.SetValueID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SetValueID })
+
+                </td>
+            </tr>
+        }
+
+
+    </table>
+    @Html.ActionLink("Add properties", "Create", new { id = ViewBag.OptionValID })
+    <br />
+    @Html.ActionLink("Back to List", "ViewOptionValues", "Optionvalues", new { id = ViewBag.OptionID},null)
+
+</div>
+
+@section Scripts{
+    <script language="javascript" type="text/javascript">
+        function copy() {
+            var url = '@Url.Action("Copy","SetValues")';
+            $('#Copy').click(function () {
+                var CopyID = $(this).data('id');
+                var OptionValueID = $('#OptionValueID').val();
+                location.href = url + '?OptionValueID=' + optionID + '&CopyID=' + copyID;
+                //$.get(url, { OptionValueID: OptionValueID, CopyID: CopyID }, function (response) {
+
+                //});
+            });
+            //    $.ajax({
+            //        url: url,
+            //        data: { copyid: _OptionValueID},
+            //        type: "POST",
+            //        success: function (data) { }
+
+
+            //    });
+            //    response();
+            //}
+        }
+    </script>
+}

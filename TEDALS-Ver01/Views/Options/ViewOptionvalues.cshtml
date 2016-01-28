@@ -1,0 +1,210 @@
+﻿@*@model TEDALS_Ver01.Models.Option
+@{
+    ViewBag.Title = "View Properties";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>@Html.ActionLink("Systems", "Index", "Lsystems")</li>
+    <li>View Properties</li>
+</ul>
+
+<h2>Options Values</h2>
+
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <h4>Family Name : @ViewBag.FamilyName</h4>
+    <h4>System name : @ViewBag.Lsystem</h4>
+    <h4>Option : @ViewBag.Option</h4>
+
+    <table class="table">
+        <tr>
+            <th>Delete</th>
+            <th>Option Value</th>
+            <th colspan="3">Set Value</th>
+            @*<th></th>
+            <th></th>
+            <th></th>*@
+        @*</tr>
+        @foreach (var item in Model.OptionValues)
+        {
+            //var row = @item.SetValue.Count + 1;
+            if (item.SetValue.Count == 0)
+            {   @:<tr>
+                @:<td>@Html.ActionLink("Delete", "Delete", "Optionvalues", new { id = item.OptionValueID},null)</td>
+                @:<td>@item.OptionVal</td>
+                @:<td></td>
+                @:</tr> 
+        }
+            int count = 0;
+        if(item.SetValue.Count!=0)
+        {
+            @:<tr>
+                @:<td rowspan="@item.SetValue.Count">@Html.ActionLink("Delete", "Delete", "Optionvalues", new { id = item.OptionValueID},null)</td>
+                @:<td rowspan="@item.SetValue.Count">@item.OptionVal</td>
+            
+                foreach(var set in item.SetValue)
+                {
+                    if (count ==0)
+                    {
+                    @:<td>@set.TcSet.SetName</td>
+                    @:<td>@set.Value</td>
+                    
+                    @:<td>@Html.ActionLink("Edit", "Edit", "SetValues", new { id = set.SetValueID },null)</td>
+                    @:</tr>
+                    }
+                    else
+                    {
+                        @:<tr>
+                        @:<td>@set.TcSet.SetName</td>
+                        @:<td> @set.Value</td>
+                        @:<td>@Html.ActionLink("Edit", "Edit", "SetValues", new { id = set.SetValueID },null)</td>
+                    }
+                    count++;
+                    
+                }
+                }
+             @:</tr>
+        } 
+    </table>
+    @Html.ActionLink("Back to List", "ViewOptions", "Options", new { id = ViewBag.id},null)
+</div>*@
+
+
+@*<table class="table">
+    <tr>
+        <td>Properties</td>
+        @foreach(var ov in Model.OptionValues)
+        {
+            <td>@ov.OptionVal</td>
+        }
+    </tr>
+    
+    @foreach(var ov in Model.OptionValues)
+    {
+        int ocount = Model.OptionValues.Count;
+        foreach(var s in ov.SetValue)
+        {
+            if ( count ==0)
+            {
+                
+            }
+        }
+    }
+</table>*@  
+
+
+@*@foreach(var ov in Model.OptionValues)
+{
+    <div class="col">@ov.OptionVal</div>
+    foreach(var s in ov.SetValue)
+    {
+        <div class="row">@s.Value</div>
+    }
+}*@
+
+
+@model TEDALS_Ver01.Models.Option
+
+@*@{
+    ViewBag.Title = "View Properties";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>@Html.ActionLink("Systems", "Index", "Lsystems")</li>
+    <li>View Properties</li>
+</ul>
+
+<h2>Options Values</h2>
+
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <h4>Family Name : @ViewBag.FamilyName</h4>
+    <h4>System name : @ViewBag.Lsystem</h4>
+    <h4>Option : @ViewBag.Option</h4>*@
+    <table class="table" style="table-layout:auto" >
+        <tr>
+            @*<th>
+                Properties
+            </th>*@
+                @*<br />*@
+           
+            <th>Option Values</th>          
+            @foreach (var tc in Model.TechnicalCharacteristic.TcSets.OrderBy(x => x.SetName))
+            {
+
+                <th>
+
+                    @tc.SetName
+
+
+                </th>
+            }
+            <th></th>
+        </tr>
+
+        @foreach (var ov in Model.OptionValues)
+        {
+            var link = false;
+            <tr>
+                <th>@ov.OptionVal</th>
+                @foreach (var s in Model.TechnicalCharacteristic.TcSets.OrderBy(x => x.SetName))
+                {
+
+                    int count = 1;
+                    
+                    foreach (var sv in ov.SetValue)
+                    {
+
+                        if (sv.TcSetID == s.TcSetID)
+                        {
+                            count = 0;
+                            <td>@sv.Value</td>
+                        }
+
+                        @*else
+                            {
+                                <td></td>
+                            }*@
+
+                    }
+                    if (count == 1)
+                    {
+                        <td class="alert-danger">Missing Values</td>
+                        link = true;
+                    
+                    }
+
+                }
+                @if(link==true)
+                {
+                    <td>@Html.ActionLink("Add missing properties", "Create", "SetValues", new {@id=ov.OptionValueID },null)</td>
+                }
+
+            </tr>
+        }
+
+
+
+
+    </table>
+

@@ -1,0 +1,115 @@
+﻿@model TEDALS_Ver01.Models.UserRight
+
+@{
+    ViewBag.Title = "User Details";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Users", "Index", "UserRights")</li>
+    <li>User Details</li>
+</ul>
+<h2>User Details</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View all users", "Index", "UserRights")</li>
+        <li>@Html.ActionLink("Add User", "Create", "UserRights")</li>
+        <li>@Html.ActionLink("View all readers", "ViewReaders", "UserRights")</li>
+        <li>@Html.ActionLink("View all Editors", "ViewEditors", "UserRights")</li>
+        <li>@Html.ActionLink("View all Exporters", "ViewExporters", "UserRights")</li>
+        <li>@Html.ActionLink("View all Admins", "ViewAdmins", "UserRights")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <div>
+        
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsReader)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsReader)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsEditor)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsEditor)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsExporter)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsExporter)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsAdmin)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsAdmin)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedBy)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.UserRightID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

@@ -1,0 +1,47 @@
+﻿@model List<TEDALS_Ver01.Models.LsystemFamily>
+@{
+    ViewBag.Title = "Xml Export";
+}
+
+<h2>Export XML</h2>
+
+@*@using (Html.BeginForm("XmlExport", "LsystemFamilies", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <input type="submit" value="OK" class="btn btn-default"/>
+}*@
+
+@using(Html.BeginForm("XmlExport","LsystemFamilies",FormMethod.Post))
+{
+    
+
+<table>
+    <tr>
+        <th>
+
+        </th>
+        <th>Family Name</th>
+        <th>Description English</th>
+        <th>Description German</th>
+    </tr>
+</table>
+foreach (var item in Model)
+{
+    <tr>
+        <td>
+            <input type="checkbox" name="idlist" value="@item.LsystemFamilyID" />
+        </td>
+        <td>
+            @item.FamilyName
+        </td>
+        <td>
+            @item.DescriptionEN
+        </td>
+        <td>
+            @item.DescriptionDE
+        </td>
+
+    </tr>
+}
+<input type="submit" value="Export" class="btn btn-default" />
+}

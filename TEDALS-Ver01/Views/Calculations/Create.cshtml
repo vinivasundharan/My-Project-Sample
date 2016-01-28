@@ -1,0 +1,202 @@
+﻿@model TEDALS_Ver01.Models.Calculation
+
+@{
+    ViewBag.Title = "Create Calculation";
+}
+<script type="text/javascript">
+   
+</script>
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home","Index","Home")</li>
+    <li>@Html.ActionLink("Calculations","Index","Calculations")</li>
+    <li>Add Calculation</li>
+</ul>
+<h2>Add Calculation</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View Calculations", "Index", "Calculations")</li>
+        <li>@Html.ActionLink("Add New Calculation", "Create", "Calculations")</li>
+        <li>@Html.ActionLink("View Data Formats", "Index", "DataFormats")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.CalculationName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CalculationName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CalculationName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                
+                <div class="col-md-2"><mark class=" label-warning">Double click on the Properties and the operands to fill in the Formula. Avoid typing into the Formula editor</mark></div>
+                <span id="message" style="color:red"></span>
+                <div class="col-md-3">
+                    
+                    <select id="formulas" size="7">
+                        @foreach (var item in ViewBag.set)
+                        {
+
+                            <option>@item.SetName</option>
+
+
+                        }
+                        <option>Length</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select id="operands" size="7">
+                        <option>+</option>
+                        <option>-</option>
+                        <option>*</option>
+                        <option>/</option>
+                        <option>²</option>
+                        <option>³</option>
+                        <option>(</option>
+                        <option>)</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CalculationFormula, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CalculationFormula,"formula", new { htmlAttributes = new { @class = "form-control", @id = "formula" } })
+                    @Html.ValidationMessageFor(model => model.CalculationFormula, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhysicalUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PhysicalUnit, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhysicalUnit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DataFormatID, "Data Format", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("DataFormatID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataFormatID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DataStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.DataStatus, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DataStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DescriptionEN, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DescriptionEN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DescriptionEN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DescriptionDE, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DescriptionDE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DescriptionDE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+    @*@section Scripts{
+        <script type="text/javascript">
+            var formulas = $("#formulas");
+            var formula = $("#formula");
+            var operands = $("#operands");
+            var textar = $("textar");
+            var message = $("#message");
+            //formula.val("");
+            var expectFormula = true;
+            if (operands.val() == "(")
+            {
+                var expectFormula = true;
+            }
+            
+
+            formulas.dblclick(function () {
+                if (expectFormula == true) {
+
+                    var currentFormula = formula.val();
+                    var appendFormula = formulas.val();
+                    var newFormula = (currentFormula  + appendFormula).trim();
+                    formula.val(newFormula);
+                    textar.val(formula.val);
+                    expectFormula = false;
+                    message.html ("");
+                    return;
+                }
+                message.html("Operand expected.");
+            });
+
+            operands.dblclick(function () {
+                if(operands.val()=="(")
+                {
+                    expectFormula = true;
+                    var currentFormula = formula.val();
+                    var appendFormula = operands.val();
+                    var newFormula = (currentFormula + appendFormula).trim();
+                    formula.val(newFormula);
+                    return;
+                }
+                if (operands.val() == ")")
+                {
+                    var currentFormula = formula.val();
+                    var appendFormula = operands.val();
+                    var newFormula = (currentFormula + appendFormula).trim();
+                    formula.val(newFormula);
+                    expectFormula = false;
+                    return;
+                }
+                if (expectFormula == false) {
+                    var currentFormula = formula.val();
+                    var appendFormula = operands.val();
+                    var newFormula = (currentFormula + appendFormula).trim();
+                    formula.val(newFormula);
+                    expectFormula = true;
+                    if (appendFormula == "²"||appendFormula=="³")
+                    {
+                        expectFormula = false;
+                    }
+                    message.html("");
+                    return;
+                }
+
+                message.html("Property expected.");
+            });
+
+        </script>
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

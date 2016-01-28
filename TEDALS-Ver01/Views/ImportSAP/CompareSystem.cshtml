@@ -1,0 +1,78 @@
+﻿@model TEDALS_Ver01.ViewModels.ImportSAP.SystemSAP
+
+@{
+    ViewBag.Title = "CompareSystem";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Import SAP", "ImportSAP", "ImportSAP")</li>
+
+    <li>Compare Systems</li>
+</ul>
+<h2>Compare System</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Compare Systems", "CompareSystem", "ImportSAP")</li>
+        <li>@Html.ActionLink("Compare Options", "CompareOption", "ImportSAP")</li>
+        <li>@Html.ActionLink("Compare Option values", "CompareOptionValues", "ImportSAP")</li>
+        <li>@Html.ActionLink("Upload a new SAP file", "Upload", "ImportSAP")</li>
+    </ul>
+</div>
+<div class=" col-md-10">
+    <h4>Data Only in SAP Export FIle</h4>
+    <br />
+    <table class="table">
+        <tr>
+            <th>Material Number</th>
+
+            @foreach (var item in Model.s_d_mismatch)
+            {
+            <tr>
+                <td>@item.MaterialNo</td>
+
+            </tr>
+            }
+        </table>
+
+        <h4>Data Only in TeDaLs</h4>
+        <br />
+        <table class="table">
+            <tr>
+                <th>System Name</th>
+                <th>Material Number</th>
+                <th></th>
+
+            </tr>
+            @foreach (var item in Model.d_s_mismatch)
+            {
+                <tr>
+                    <td>@item.SystemName</td>
+                    <td>@item.MaterialNo</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Lsystems", new { id = item.LsystemID }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Lsystems", new { id = item.LsystemID }, null)
+                </td>
+            </tr>
+            }
+        </table>
+
+        <h4>Data in TeDaLs and SAP Export File</h4>
+        <br />
+        <table class="table">
+            <tr>
+                <th>System Name</th>
+                <th>Material Number</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.d_s_match)
+            {
+                <tr>
+                    <td>@item.SystemName</td>
+                    <td>@item.MaterialNo</td>
+                    <td>@Html.ActionLink("Compare Option", "CompareOption", "ImportSAP", new { id = item.LsystemID }, null)</td>
+                </tr>
+            }
+        </table>
+
+    </div>

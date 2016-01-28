@@ -1,0 +1,118 @@
+﻿@model TEDALS_Ver01.ViewModels.test2
+
+@*@{
+        ViewBag.Title = "test1";
+    }
+
+    <h2>test1</h2>
+
+    <table class="table">
+        <tr>
+            <td></td>
+            @foreach (var o in Model.OptionValues)
+            {
+                <td>@o.OptionVal</td>
+
+            }
+        </tr>
+        @foreach(var item in Model.TechnicalCharacteristic.TcSets)
+        {
+            <tr>
+                <td>@item.SetName</td>
+            </tr>
+        }
+        @foreach(var o in Model.OptionValues)
+        {
+            @foreach(var set in o.SetValue)
+            {
+                <tr></tr>
+            }
+        }
+    </table>*@
+
+@*<table class="table">
+    <tr>
+        <th>Option Value</th>
+
+        @foreach (var t in Model.Option.TechnicalCharacteristic.TcSets.OrderBy(x => x.SetName))
+        {
+
+            <th>@t.SetName</th>
+
+
+        }
+    </tr>
+    @foreach (var item in Model.Option.OptionValues)
+    {
+        <tr>
+            <td>@item.OptionVal</td>
+            @foreach (var s in item.SetValue.OrderBy(x => x.TcSet.SetName))
+            {
+                <td>@s.Value</td>
+            }
+        </tr>
+    }
+</table>*@
+
+<table class="table">
+    <tr>
+        <th>
+            Option Values
+            @*@foreach (var ov in Model.Option.OptionValues)
+                {
+
+
+                    <ul>
+                        <li>@ov.OptionVal</li>
+                    </ul>
+                }*@
+        </th>
+        @foreach (var tc in Model.Option.TechnicalCharacteristic.TcSets.OrderBy(x => x.SetName))
+        {
+
+            <th>
+
+                @tc.SetName
+
+
+            </th>
+        }
+    </tr>
+    
+    @foreach (var ov in Model.Option.OptionValues)
+    {
+        
+        <tr>
+            <td>@ov.OptionVal</td>
+            @foreach (var s in Model.Option.TechnicalCharacteristic.TcSets.OrderBy(x => x.SetName))
+            {
+
+                int count = 1;
+                foreach (var sv in ov.SetValue)
+                {
+                    
+                    if (sv.TcSetID == s.TcSetID)
+                    {
+                        count = 0;
+                        <td>@sv.Value</td>
+                    }
+                    
+                    @*else
+                    {
+                        <td></td>
+                    }*@
+
+                }
+                if(count==1)
+                {
+                    <td class="alert-danger">Missing Values</td>
+                }
+
+            }
+        </tr>
+    }
+
+
+
+
+</table>

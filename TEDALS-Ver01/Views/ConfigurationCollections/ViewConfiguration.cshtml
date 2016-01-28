@@ -1,0 +1,58 @@
+﻿@model List<TEDALS_Ver01.Models.ConfigurationCollection>
+
+@{
+    ViewBag.Title = "View Configuration Collection";
+}
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("View all Configuration", "Index", "ConfigurationCollections")</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+
+    <table class="table">
+        <tr>
+            <th>
+                Configuration Name
+            </th>
+            <th>
+                Description English
+            </th>
+            <th>
+                Description in German
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.ActionLink(item.CollectionName, "ListConfiguration", "ConfigurationCollections", new { id = item.ConfigurationCollectionID }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionEN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionDE)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ConfigurationCollectionID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ConfigurationCollectionID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ConfigurationCollectionID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <p>
+        <hr />
+        @Html.ActionLink("Add New", "Create", "ConfigurationCollection", new { LsystemID = ViewBag.LsystemID }, null)
+    </p>
+</div>

@@ -1,0 +1,124 @@
+﻿@*@model TEDALS_Ver01.ViewModels.Test1
+@{
+    ViewBag.Title = "Test1";
+}
+
+<h2>Test1</h2>
+
+@using (Html.BeginForm("Test1", "ConfigurationCollections", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Lsystemfamilies.LsystemFamilyID, "System Family", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("LsystemFamilyID", null,new{onchange = "this.form.submit();"})
+            @Html.ValidationMessageFor(model => model.Lsystemfamilies.LsystemFamilyID, "", new { @class = "text-danger" })
+        </div>   
+    </div>
+    <input type="submit" value="Test1" />
+   
+    @*foreach (var item in Model.Lsystems.Options)
+    {
+        <table>
+            <tr>
+                <th>@item.OptionName</th>
+            </tr>
+        </table>
+    }*@
+@*}
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Lsystems.LsystemID, "System ", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class=" col-md-10">
+        @Html.DropDownList("LsystemID", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Lsystems.LsystemID, "", new { @class = "text-danger" })
+    </div>
+</div>*@
+
+@model TEDALS_Ver01.ViewModels.Test1
+
+
+@*<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>*@
+<script language="javascript" type="text/javascript">
+    function getSystem(_LsystemFamilyID) {
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $("#lsystem").html(procemessage).show();
+        var url = "/ConfigurationCollections/getSystem/";
+
+        $.ajax({
+            url: url,
+            data: { LsystemFamilyID: _LsystemFamilyID },
+            cache: false,
+            type: "POST",
+
+            success: function (data) {
+                var markup = "<option value='0'>Select System</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                }
+                $("#lsystem").html(markup).show();
+            }
+            //error: function () {
+            //    alert("error : ");
+            //}
+        });
+
+    }
+</script>
+
+
+@*<script type="text/javascript">
+    $(function () {
+        $('#LsystemFamilies').change(function () {
+            var selectedFamilyId = $(this).val();
+            $.getJSON('@Url.Action("getSystem")', { LsystemFamilyID: selectedFamilyId }, function (getSystem) {
+                var systemSelect = $('#SelectedSystemID');
+                citiesSelect.empty();
+                $.each(getSystem, function (index, Lsystem) {
+                    lsystemSelect.append(
+                        $('<option/>')
+                            .attr('value', LsystemName.Id)
+                            .text(LsystemName.Name)
+                    );
+                });
+            });
+        });
+    })
+</script>*@
+
+@*$.ajax(
+{
+   url:"~ConfigurationCollections/getSystem/"
+})*@
+        <h4>
+            MVC Cascading Dropdown List Using Jquery
+        </h4>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.DropDownListFor(m => m.Lsystemfamilies, new SelectList(Model.Lsystemfamilies, "LsystemFamilyID", "FamilyName"),"Select Family", new { @id = "FamilyName", @onchange = "javascript:getSystem(this.value);" })
+        </div>
+     <br />
+    <br />
+    @*<div>
+        @Html.DropDownListFor(m=>m.Lsystems,Enumerable.Empty<SelectListItem>())
+            </div>*@
+    <select id="lsystem" name="lsystem" style="width: 200px"></select>
+
+    <br /><br />
+}
+
+@using (Html.BeginForm())
+{
+    <div>
+        Configuration Name : 
+        @Html.TextBox("Name")
+    </div>
+    <div>
+        Description English :
+        @Html.TextBox("EN")
+    </div>
+    <div>
+        Description German :
+        @Html.TextBox("DE")
+    </div>
+}

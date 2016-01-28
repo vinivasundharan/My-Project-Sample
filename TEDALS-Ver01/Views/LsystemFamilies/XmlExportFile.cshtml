@@ -1,0 +1,20 @@
+﻿@model TEDALS_Ver01.ViewModels.ExportFileName
+@{
+    ViewBag.Title = "XmlExportFile";
+}
+
+<h2>XmlExportFile</h2>
+
+
+@using(Html.BeginForm("XmlExport","LsystemFamilies",FormMethod.Post))
+{
+    @Html.HiddenFor(model=>model.FamilyID)
+    @Html.EditorFor(model=>model.FileName)
+    <input type="submit" value="Create and export" class="btn btn-default" />
+}
+@*@using (Html.BeginForm("XmlExport", "LsystemFamilies", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model=>model.FamilyID)
+    <input type="file" name="file" />
+    <input type="submit" value="OK" />
+}*@

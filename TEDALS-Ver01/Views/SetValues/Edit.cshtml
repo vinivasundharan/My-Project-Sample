@@ -1,0 +1,64 @@
+﻿@model TEDALS_Ver01.Models.SetValue
+
+@{
+    ViewBag.Title = "Edit Property Value";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>@Html.ActionLink("Systems", "Index", "Lsystems")</li>
+    <li>@Html.ActionLink("Options", "Index", "Options")</li>
+    <li>@Html.ActionLink("Option Values", "Index", "OptionValues")</li>
+    <li>@Html.ActionLink("Properties", "Index", "SetValues", new { id = Model.OptionValueID }, null)</li>
+    <li> Add System Properties</li>
+</ul>
+
+<h2>Edit</h2>
+
+<h4>Family Name : @ViewBag.FamilyName</h4>
+<h4>System name : @ViewBag.Lsystem</h4>
+<h4>Option : @ViewBag.Option</h4>
+<h4>Option Value : @ViewBag.OptionValue</h4>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SetValueID)
+        @Html.HiddenFor(model=>model.OptionValueID)
+        @Html.HiddenFor(model =>model.TcSetID)
+        <h5>@ViewBag.TcSet</h5>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>*@
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "SetValues", new { id = Model.OptionValueID},null)
+</div>

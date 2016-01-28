@@ -1,0 +1,49 @@
+﻿@model List<TEDALS_Ver01.ViewModels.CalculationVM.CalculationResult>
+@{
+    ViewBag.Title = "Calculation result";
+}
+@if(ViewBag.Message!=null)
+{
+    <h4>@ViewBag.Message</h4>
+    using(Html.BeginForm())
+    {
+           <p>
+                Length @Html.TextBox("Length")
+                <input type="submit" class="btn btn-default" value="Submit" />
+            </p>
+    }
+}
+
+else
+{
+    <h2>Calculation results</h2>
+    <h4>System Name : @ViewBag.SystemName</h4>
+    <h4>Calculation Name : @ViewBag.CalcName</h4>
+    <h4>Calculation Formula : @ViewBag.Formula</h4>
+   if(ViewBag.Length!=null)
+   {
+       <h4>Length : @ViewBag.Length</h4>
+   }
+    
+    <table class=" table">
+        <tr>
+            <th>Configuration Name</th>
+            <th>Calculation result</th>
+        </tr>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.ConfigurationName</td>
+                <td>
+                    <ul>
+                        @foreach (var ans in item.AnsList)
+                        {
+                            <li>@ans</li>
+                        }
+                    </ul>
+
+                </td>
+            </tr>
+        }
+    </table>
+}

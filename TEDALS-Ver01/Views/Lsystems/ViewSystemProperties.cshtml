@@ -1,0 +1,51 @@
+﻿    <table class="table">
+        <tr>
+            <th>Delete</th>
+            <th>Option Value</th>
+            <th colspan="3">Set Value</th>
+            @*<th></th>
+            <th></th>
+            <th></th>*@
+        </tr>
+        @foreach (var item in Model.OptionValues)
+        {
+            //var row = @item.SetValue.Count + 1;
+            if (item.SetValue.Count == 0)
+            {   @:<tr>
+                @:<td>@Html.ActionLink("Delete", "Delete", "Optionvalues", new { id = item.OptionValueID},null)</td>
+                @:<td>@item.OptionVal</td>
+                @:<td></td>
+                @:</tr> 
+        }
+            int count = 0;
+        if(item.SetValue.Count!=0)
+        {
+            @:<tr>
+                @:<td rowspan="@item.SetValue.Count">@Html.ActionLink("Delete", "Delete", "Optionvalues", new { id = item.OptionValueID},null)</td>
+                @:<td rowspan="@item.SetValue.Count">@item.OptionVal</td>
+            
+                foreach(var set in item.SetValue)
+                {
+                    if (count ==0)
+                    {
+                    @:<td>@set.TcSet.SetName</td>
+                    @:<td>@set.Value</td>
+                    @:<td>@set.Status</td>
+                    @:<td>@Html.ActionLink("Edit", "Edit", "SetValues", new { id = set.SetValueID },null)</td>
+                    @:</tr>
+                    }
+                    else
+                    {
+                        @:<tr>
+                        @:<td>@set.TcSet.SetName</td>
+                        @:<td> @set.Value</td>
+                        @:<td>@set.Status</td>
+                        @:<td>@Html.ActionLink("Edit", "Edit", "SetValues", new { id = set.SetValueID },null)</td>
+                    }
+                    count++;
+                    
+                }
+                }
+             @:</tr>
+        } 
+    </table>

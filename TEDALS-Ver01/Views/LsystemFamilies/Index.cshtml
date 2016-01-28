@@ -1,0 +1,81 @@
+﻿@model IEnumerable<TEDALS_Ver01.Models.LsystemFamily>
+@{
+    ViewBag.Title = "System Family";
+}
+
+<ul class="breadcrumb"> You are Here :
+        <li>@Html.ActionLink("Home","Index","Home")</li>
+        <li>System family</li>
+</ul>
+
+<h2>System families</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index","LsystemFamilies")</li>
+        <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+        <li>@Html.ActionLink("View System Independent Option", "ViewOptions", "Options", new { id = 1038 }, null)</li>
+
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+        <li>@Html.ActionLink("Export All system Families", "ExportAll", "LsystemFamilies")</li>
+    </ul>
+</div>
+
+<div class="col-md-10" id="form">
+    @using (Html.BeginForm())
+    { 
+    <p>
+        Search @Html.TextBox("SearchString") 
+        <input type="submit" class="btn btn-default" value="Search" />
+    </p>
+    }
+    <table class="table" id="Index">
+        <tr>
+            <th>
+                Family Name
+            </th>
+            <th>
+                System Count
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td data-toggle="tooltip" title="@item.DescriptionDE" data-placement="right">
+                    @Html.ActionLink(item.FamilyName, "ViewSystems", "LsystemFamilies", new { id = @item.LsystemFamilyID},null)
+                </td>
+                <td data-toggle="tooltip" title="Number of Systems in @item.FamilyName" data-placement="right">
+                    @Html.DisplayFor(modelItem => item.LsystemCount)
+                </td>
+                <td>
+                    @Html.ActionLink("Export System Family", "XmlExport", "LsystemFamilies", new { id = item.LsystemFamilyID }, null)|
+                    @Html.ActionLink("Edit", "Edit", new { id = item.LsystemFamilyID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.LsystemFamilyID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.LsystemFamilyID })
+                   
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>
+    @*<input type="button" id="btn" class="btn btn-default" value="Create new">
+</div>
+<div id="Create" style="display:none">
+    @Html.Partial("_Create",new TEDALS_Ver01.Models.LsystemFamily())
+</div>*@
+
+@*@section Scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn').click(function () {
+            $('#Create').toggle();
+
+        });
+    });
+</script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+}*@
+

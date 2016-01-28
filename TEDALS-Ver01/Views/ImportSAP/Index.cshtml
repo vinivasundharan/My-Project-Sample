@@ -1,0 +1,40 @@
+﻿@model TEDALS_Ver01.ViewModels.SAP_Table_View
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div class="col-md-6">
+
+
+    <table class="table">
+        <tr>
+            <th>Option</th>
+            <th>Option Value</th>
+        </tr>
+
+        @foreach (var item in Model.SAP_Existing)
+        {
+            foreach (var o in item.OptionValues)
+            {
+                <tr>
+                    <td>@item.OptionName</td>
+                    <td>@o</td>
+                </tr>
+
+            }
+        }
+    </table>
+</div>
+
+<div class="col-md-6">
+    <table class="table">
+        @foreach(var item in Model.FromSAP)
+        {
+            <tr>
+                <td>@item.OptionName</td>
+                <td>@item.OptionValue</td>
+            </tr>
+        }
+    </table>
+</div>

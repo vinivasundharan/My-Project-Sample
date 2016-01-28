@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TEDALS_Ver01.Models.DataFormat>
+
+@{
+    ViewBag.Title = "Data Formats";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+
+    <li>Data format</li>
+</ul>
+<h2>Data Formats</h2>
+
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View Technical Characteristics", "Index","TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("Add New Technical Characteristics", "Create", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("View Data Formats", "Index", "DataFormats")</li>
+        <li>@Html.ActionLink("Add new Data Formats", "Create", "DataFormats")</li>
+    </ul>
+</div>
+<div class="col-md-10">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FormatName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormatType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecisionDigits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScalingDigits)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td data-toggle="tooltip" title="@item.DescriptionDE">
+                    @Html.DisplayFor(modelItem => item.FormatName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormatType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrecisionDigits)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScalingDigits)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.DataFormatID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.DataFormatID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.DataFormatID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

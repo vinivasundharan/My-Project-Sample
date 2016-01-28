@@ -1,0 +1,141 @@
+﻿@model TEDALS_Ver01.Models.Views
+
+@{
+    ViewBag.Title = "Create";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Views", "Index", "Views123")</li>
+    <li>Add View</li>
+</ul>
+
+<h2>Add View</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View all views", "Index", "Views123")</li>
+        <li>@Html.ActionLink("Add View", "Create", "Views123")</li>
+        <li>@Html.ActionLink("View all systems", "Index", "Lsystems")</li>
+        <li>@Html.ActionLink("Copy View","CopyView","Views123")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    @using (Html.BeginForm("Create", "Views123"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-12">
+            @foreach (var item in ViewBag.Lsystem)
+            {
+                <div class="col-md-3">
+                    <input type="checkbox" value="@item.LsystemID" name="lsystemid" />  @item.LsystemName
+                </div>
+            }
+
+        </div>
+
+        <div class="col-md-12" style="clear:both">
+            <br />
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    }
+    <div class="col-md-10">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Views</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ViewsName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ViewsName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ViewsName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DescriptionEN, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DescriptionEN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionEN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DescriptionDE, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DescriptionDE, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionDE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @if (ViewBag.Message != null)
+                {
+                    <h4>@ViewBag.Message</h4>
+                }
+                @foreach (var tc in ViewBag.TC)
+                {
+                    <div class="col-md-3">
+                        <table>
+                            <tr><th><h4 style="word-wrap:break-word;word-break:break-all">@tc.TCName</h4></th></tr>
+                            @foreach (var item in tc.TcSets)
+                            {
+                                <tr><td><input type="checkbox" value="@item.TcSetID" name="TcSetID" />   @item.SetName</td></tr>
+                            }
+                        </table>
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+
+
+
+
+                }
+                <hr />
+                <div class="col-md-10">
+                    <h4>Calculations available</h4>
+
+                    <table class="table">
+                        <tr>
+                            <th></th>
+                            <th>Calculation Name</th>
+                            <th>Calculation Formula</th>
+                            <th>Description English</th>
+                            <th>Description German</th>
+                        </tr>
+
+                        @foreach (var item in ViewBag.Calculation)
+                        {
+                            <tr>
+
+                                <td><input type="checkbox" value="@item.CalculationID" name="CalcID" /></td>
+                                <td>@item.CalculationName</td>
+                                <td>@item.CalculationFormula</td>
+                                <td>@item.DescriptionEN</td>
+                                <td>@item.DescriptionDE</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+
+
+
+
+
+
+
+                <div class="form-group">
+                    <div class=" col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

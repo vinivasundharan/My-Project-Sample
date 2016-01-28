@@ -1,0 +1,51 @@
+﻿@model List<TEDALS_Ver01.Models.Calculation>
+
+@{
+    ViewBag.Title = "Available Calculations";
+}
+<h2>Available Calculations</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Calculation Name
+        </th>
+        <th>
+            Calculation Formula
+        </th>
+        <th>
+            Physical Unit
+        </th>
+        <th>
+            Data Status
+        </th>
+        <th>
+            Data Format
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @item.CalculationName
+            </td>
+            <td>
+                @item.CalculationFormula
+            </td>
+            <td>
+                @item.PhysicalUnit
+            </td>
+            <td>
+                @item.DataStatus
+            </td>
+            <td>
+                @item.DataFormat.FormatName
+            </td>
+            <td>@Html.ActionLink("Calculate", "Calculate", "Calculations", new { calcID = @item.CalculationID, OptionValID =@ViewBag.OptionValID }, null)</td>
+        </tr>
+    }
+</table>
+<hr />
+@Html.ActionLink("Back to List", "ViewOptionvalues", "OptionValues", new { id= @ViewBag.id},null)

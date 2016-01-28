@@ -1,0 +1,94 @@
+﻿@model TEDALS_Ver01.Models.ConfigurationCollection
+
+@{
+    ViewBag.Title = "Details";
+}
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Configurations", "Index", "ConfigurationCollections")</li>
+    <li>Configuration details</li>
+</ul>
+<h2>Configuration Details</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("View all Configuration", "Index", "ConfigurationCollections")</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Lsystem.LsystemName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Lsystem.LsystemName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CollectionName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CollectionName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DescriptionEN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DescriptionEN)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DescriptionDE)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DescriptionDE)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedBy)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ConfigurationCollectionID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

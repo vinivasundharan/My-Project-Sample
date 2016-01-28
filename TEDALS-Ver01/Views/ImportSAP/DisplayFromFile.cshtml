@@ -1,0 +1,42 @@
+﻿@model List<TEDALS_Ver01.ViewModels.DisplayFromFile>
+@{
+    ViewBag.Title = "DisplayFromFile";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+    <li>Import SAP characteristics</li>
+</ul>
+
+<h2>Display From SAP File</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Compare Value", "Compare", "ImportSAP")</li>
+
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <table class="table">
+        <tr>
+            <th>Material Number</th>
+            <th>Option Name</th>
+            <th>Option Value</th>
+            <th>Description</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+
+
+            <tr>
+                <td>@item.MaterialNumber</td>
+                <td>@item.OptionName</td>
+                <td>@item.OptionValue</td>
+                <td>@item.Description</td>
+            </tr>
+        }
+    </table>
+</div>

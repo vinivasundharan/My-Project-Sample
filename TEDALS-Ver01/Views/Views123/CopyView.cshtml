@@ -1,0 +1,81 @@
+﻿@model TEDALS_Ver01.Models.Views
+@{
+    ViewBag.Title = "CopyView";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+    <li>Copy View</li>
+</ul>
+
+<h2>Copy View</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View all views", "Index", "Views123")</li>
+        <li>@Html.ActionLink("Add View", "Create", "Views123")</li>
+        <li>@Html.ActionLink("View all systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+<div class="col-md-10">
+
+
+    @using (Html.BeginForm("CopyView", "Views123", Model))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ViewsName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.EditorFor(model => model.ViewsName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ViewsName, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DescriptionEN, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.EditorFor(model => model.DescriptionEN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DescriptionEN, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DescriptionDE, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.EditorFor(model => model.DescriptionDE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DescriptionDE, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-2"> Select View</div>
+                <div class="col-md-10">
+                    @Html.DropDownList("CopyID", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+
+            @*div class="form-group">
+                    <div class="control-label col-md-2">Select View</div>
+                    <div class="col-md-10">
+                        @Html.DropDownList("CopyID", null, "Select View", htmlAttributes: new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.ViewNewName, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Copy" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+    }
+
+</div>

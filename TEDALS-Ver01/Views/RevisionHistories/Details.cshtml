@@ -1,0 +1,90 @@
+﻿@model TEDALS_Ver01.Models.RevisionHistory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RevisionHistory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SystemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SystemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Option)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Option)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Optionvalue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Optionvalue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TCSetName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TCSetName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InitialValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InitialValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RevisionHistoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

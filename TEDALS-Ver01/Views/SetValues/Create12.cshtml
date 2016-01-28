@@ -1,0 +1,179 @@
+﻿@model  List<TEDALS_Ver01.Models.SetValue>
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>SetValue</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div><a href="#" id="addNew">Add new</a></div>
+        <table class="table" id="dataTable">
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+                <th>Status</th>
+
+            </tr>
+            @*@for (int i = 0; i < Model.TcSet.Count;i++ )
+                {*@
+
+
+
+            @if(Model!=null && Model.Count>0)
+            {
+                
+            
+            int count = 0;
+            foreach(var item in Model)
+            {
+                <tr>
+                <td>@Html.DropDownList("TcSetID", null, htmlAttributes: new { @class = "form-control" })</td>
+                <td>@Html.EditorFor(model =>model[count].Value)</td>
+                <td>@Html.EditorFor(model=>model[count].Status)</td>
+                </tr>
+                
+                count++;  
+                @*foreach (var set in item.TcSet)
+                {
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(model=>model[count].SetValue.TcSetID)
+                            @set.SetName
+                        </td>
+                        <td>
+                            <div class=" col-md-10">
+                                @Html.EditorFor(model => model[count].SetValue.Value, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model[count].SetValue.Value, "", new { @class = "text-danger" })
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model[count].SetValue.Status, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model[count].SetValue.Status, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                      
+                }*@
+                
+            }
+            }
+            
+            
+            
+        </table>
+    </div>
+
+
+
+    @*@Html.HiddenFor(model=>model.OptionValueID)*@
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TcSetID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TcSetID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TcSetID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @foreach (var item in Model.TcSet)
+            {
+                @item.SetName;
+            }
+
+            @Html.LabelFor(model => model.TcSetID, "TcSetID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TcSetID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TcSetID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script language="javascript">
+                    $(document).ready(function () {
+
+                        //1. Add new row
+                        $("#addNew").click(function (e) {
+                            e.preventDefault();
+                            var $tableBody = $("#dataTable");
+                            var $trLast = $tableBody.find("tr:last");
+                            var $trNew = $trLast.clone();
+
+                            var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+                            $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
+                            $.each($trNew.find(':input'), function (i, val) {
+                                // Replaced Name
+                                var oldN = $(this).attr('name');
+                                var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                                $(this).attr('name', newN);
+                                //Replaced value
+                                var type = $(this).attr('type');
+                                if (type.toLowerCase() == "text") {
+                                    $(this).attr('value', '');
+                                }
+
+                                // If you have another Type then replace with default value
+                                $(this).removeClass("input-validation-error");
+
+                            });
+                            $trLast.after($trNew);
+
+                            // Re-assign Validation
+                            var form = $("form")
+                                .removeData("validator")
+                                .removeData("unobtrusiveValidation");
+                            $.validator.unobtrusive.parse(form);
+                        });
+
+                        // 2. Remove
+                        $('a.remove').live("click", function (e) {
+                            e.preventDefault();
+                            $(this).parent().parent().remove();
+                        });
+
+                    });
+    </script>
+}

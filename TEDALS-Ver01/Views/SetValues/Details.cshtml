@@ -1,0 +1,97 @@
+﻿@model TEDALS_Ver01.Models.SetValue
+@{
+    ViewBag.Title = "Property Details";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>@Html.ActionLink("Systems", "Index", "Lsystems")</li>
+    <li>@Html.ActionLink("Options", "Index", "Options")</li>
+    <li>@Html.ActionLink("Option Values", "Index", "OptionValues")</li>
+    <li>@Html.ActionLink("Properties", "Index", "SetValues", new { id = Model.OptionValueID }, null)</li>
+    <li> Property Details</li>
+</ul>
+<h4>Family Name : @ViewBag.FamilyName</h4>
+<h4>System name : @ViewBag.Lsystem</h4>
+<h4>Option : @ViewBag.Option</h4>
+<h4>Option Value : @ViewBag.OptionValue</h4>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OptionValue.OptionVal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OptionValue.OptionVal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TcSet.SetName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TcSet.SetName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedOn)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Edit", "Edit", "SetValues", new { id=Model.SetValueID},null) | 
+            @Html.ActionLink("Back to List", "Index", "SetValues", new { id = Model.OptionValueID},null)
+        </div>
+    }
+</div>

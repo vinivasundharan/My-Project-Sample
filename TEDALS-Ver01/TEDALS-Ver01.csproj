@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{63C62BBB-44BB-4464-A3CE-B219EC361997}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TEDALS_Ver01</RootNamespace>
+    <AssemblyName>TEDALS-Ver01</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\packages\EPPlus.4.0.5\lib\net20\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Excel">
+      <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MathParse">
+      <HintPath>..\packages\MathParse.1.0.0\lib\MathParse.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NCalc">
+      <HintPath>..\packages\ncalc.1.3.8\lib\NCalc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.JsonResult">
+      <HintPath>..\packages\Newtonsoft.JsonResult.1.0.5369.19299\lib\net40\Newtonsoft.JsonResult.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion">
+      <HintPath>..\packages\LinqToExcel.1.10.1\lib\Remotion.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq">
+      <HintPath>..\packages\LinqToExcel.1.10.1\lib\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Interfaces">
+      <HintPath>..\packages\LinqToExcel.1.10.1\lib\Remotion.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.4\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=__MvcPagesVersion__, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="TrackerEnabledDbContext">
+      <HintPath>..\packages\TrackerEnabledDbContext.2.7.0\lib\net45\TrackerEnabledDbContext.dll</HintPath>
+    </Reference>
+    <Reference Include="TrackerEnabledDbContext.Common">
+      <HintPath>..\packages\TrackerEnabledDbContext.Common.1.1.0\lib\net45\TrackerEnabledDbContext.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CalculationsController.cs" />
+    <Compile Include="Controllers\ConfigurationCollectionsController.cs" />
+    <Compile Include="Controllers\Config_OptionValController.cs" />
+    <Compile Include="Controllers\DataFormatsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImportSAPController.cs" />
+    <Compile Include="Controllers\LsystemFamiliesController.cs" />
+    <Compile Include="Controllers\LsystemsController.cs" />
+    <Compile Include="Controllers\OptionsController.cs" />
+    <Compile Include="Controllers\OptionValuesController.cs" />
+    <Compile Include="Controllers\RevisionHistoriesController.cs" />
+    <Compile Include="Controllers\SetValuesController.cs" />
+    <Compile Include="Controllers\TcSetsController.cs" />
+    <Compile Include="Controllers\TechnicalCharacteristicsController.cs" />
+    <Compile Include="Controllers\UserRightsController.cs" />
+    <Compile Include="Controllers\Views123Controller.cs" />
+    <Compile Include="DAL\TedalsContext.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511160715366_InitialCreate.cs" />
+    <Compile Include="Migrations\201511160715366_InitialCreate.Designer.cs">
+      <DependentUpon>201511160715366_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511250937485_FromSAP.cs" />
+    <Compile Include="Migrations\201511250937485_FromSAP.Designer.cs">
+      <DependentUpon>201511250937485_FromSAP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Calculation.cs" />
+    <Compile Include="Models\ConfigurationCollection.cs" />
+    <Compile Include="Models\Config_OptionVal.cs" />
+    <Compile Include="Models\DataFormat.cs" />
+    <Compile Include="Models\FromSAP.cs" />
+    <Compile Include="Models\ImportSAP_ExistingOptionValues.cs" />
+    <Compile Include="Models\Lsystem.cs" />
+    <Compile Include="Models\LsystemFamily.cs" />
+    <Compile Include="Models\Option.cs" />
+    <Compile Include="Models\OptionValue.cs" />
+    <Compile Include="Models\RevisionHistory.cs" />
+    <Compile Include="Models\SetValue.cs" />
+    <Compile Include="Models\TcSet.cs" />
+    <Compile Include="Models\TechnicalCharacteristic.cs" />
+    <Compile Include="Models\UserRight.cs" />
+    <Compile Include="Models\Views.cs" />
+    <Compile Include="Models\ViewsCalculation.cs" />
+    <Compile Include="Models\ViewsProperty.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CalculationVM\BasicFunctions.cs" />
+    <Compile Include="ViewModels\CalculationVM\CalculationResult.cs" />
+    <Compile Include="ViewModels\CalculationVM\Option_OptionVal.cs" />
+    <Compile Include="ViewModels\ConfigurationCollectionVM\ConfigIndex.cs" />
+    <Compile Include="ViewModels\ConfigurationCollectionVM\Config_Create.cs" />
+    <Compile Include="ViewModels\ConfigurationCollectionVM\EditConfigVM.cs" />
+    <Compile Include="ViewModels\ConfigurationCollectionVM\ListAllConfiguration.cs" />
+    <Compile Include="ViewModels\ConfigurationCollectionVM\ListConfiguration.cs" />
+    <Compile Include="ViewModels\ConfigurationCollectionVM\OptionOptionValList.cs" />
+    <Compile Include="ViewModels\ConfigurationCollectionVM\Test1.cs" />
+    <Compile Include="ViewModels\ImportSAPVM\OptionSAP.cs" />
+    <Compile Include="ViewModels\ImportSAPVM\OptionValueSAP.cs" />
+    <Compile Include="ViewModels\ImportSAPVM\SystemSAP.cs" />
+    <Compile Include="ViewModels\OptionValueVM\AddOptionValue.cs" />
+    <Compile Include="ViewModels\SetValueVM\AddSetValue.cs" />
+    <Compile Include="ViewModels\CalculationVM\CalculationViewModel.cs" />
+    <Compile Include="ViewModels\Views123VM\Configcombi.cs" />
+    <Compile Include="ViewModels\Views123VM\config_combi_VM.cs" />
+    <Compile Include="ViewModels\Views123VM\CopyView.cs" />
+    <Compile Include="ViewModels\Views123VM\DispalyViewsVM.cs" />
+    <Compile Include="ViewModels\ImportSAPVM\DisplayFromFile.cs" />
+    <Compile Include="ViewModels\Views123VM\EditViewsVM.cs" />
+    <Compile Include="ViewModels\ExportClassVM\SystemFamily.cs" />
+    <Compile Include="ViewModels\SystemFamilyVM\ExportFileName.cs" />
+    <Compile Include="ViewModels\SystemFamilyVM\export_test.cs" />
+    <Compile Include="ViewModels\SystemFamilyVM\Exp_LsystemFamily.cs" />
+    <Compile Include="ViewModels\SystemFamilyVM\Fam_FamList.cs" />
+    <Compile Include="ViewModels\Views123VM\ListViewSystemValues.cs" />
+    <Compile Include="ViewModels\SystemVM\LsystemCheckbox.cs" />
+    <Compile Include="ViewModels\SystemFamilyVM\LsystemFamily_Lsystem.cs" />
+    <Compile Include="ViewModels\SystemVM\Lsystem_Option.cs" />
+    <Compile Include="ViewModels\Views123VM\ModelToBePassed.cs" />
+    <Compile Include="ViewModels\OptionVM\OptionValue_SetVal.cs" />
+    <Compile Include="ViewModels\OptionVM\Option_OptionValues.cs" />
+    <Compile Include="ViewModels\ImportSAPVM\SAP_Existing.cs" />
+    <Compile Include="ViewModels\ImportSAPVM\SAP_Table_View.cs" />
+    <Compile Include="ViewModels\Views123VM\subtest.cs" />
+    <Compile Include="ViewModels\TechnicalCharacteristicVM\TC_CopyProperty.cs" />
+    <Compile Include="ViewModels\TechnicalCharacteristicVM\TC_TcSet.cs" />
+    <Compile Include="ViewModels\OptionVM\test2.cs" />
+    <Compile Include="ViewModels\Views123VM\testmain.cs" />
+    <Compile Include="ViewModels\Views123VM\Reduce_OVlist.cs" />
+    <Compile Include="ViewModels\OptionVM\ViewOptionValues.cs" />
+    <Compile Include="ViewModels\Views123VM\ViewsProperty12.cs" />
+    <Compile Include="ViewModels\Views123VM\ViewsResult.cs" />
+    <Compile Include="ViewModels\Views123VM\ViewsResultWithout.cs" />
+    <Compile Include="ViewModels\Views123VM\ViewsResult_Complete.cs" />
+    <Compile Include="ViewModels\Views123VM\ViewSummarize_CompleteResult.cs" />
+    <Compile Include="ViewModels\Views123VM\ViewSummarize_ConfigPermute.cs" />
+    <Compile Include="ViewModels\Views123VM\ViewSummarize_FinalResult.cs" />
+    <Compile Include="ViewModels\Views123VM\ViewSummarize_OptionValueCombi.cs" />
+    <Compile Include="ViewModels\Views123VM\ViewsVM.cs" />
+    <Compile Include="ViewModels\Views123VM\ViewSystemValuesVM.cs" />
+    <Compile Include="ViewModels\Views123VM\View_TC.cs" />
+    <Compile Include="ViewModels\Views123VM\View_Without.cs" />
+    <Compile Include="ViewModels\Views123VM\VRS_Ov_setname_val.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1445496428_tmp_Bosch-500x126.jpg" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Custom.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Images\bosch website logo.png" />
+    <Content Include="Images\iouioiu.png" />
+    <Content Include="Images\ztzu.png" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Properties\PublishProfiles\TedalsVer01.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\UserRights\Create.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Lsystems\Create.cshtml" />
+    <Content Include="Views\Lsystems\Delete.cshtml" />
+    <Content Include="Views\Lsystems\Details.cshtml" />
+    <Content Include="Views\Lsystems\Edit.cshtml" />
+    <Content Include="Views\Lsystems\Index.cshtml" />
+    <Content Include="Views\DataFormats\Create.cshtml" />
+    <Content Include="Views\DataFormats\Delete.cshtml" />
+    <Content Include="Views\DataFormats\Details.cshtml" />
+    <Content Include="Views\DataFormats\Edit.cshtml" />
+    <Content Include="Views\DataFormats\Index.cshtml" />
+    <Content Include="Views\LsystemFamilies\Create.cshtml" />
+    <Content Include="Views\LsystemFamilies\Delete.cshtml" />
+    <Content Include="Views\LsystemFamilies\Details.cshtml" />
+    <Content Include="Views\LsystemFamilies\Edit.cshtml" />
+    <Content Include="Views\LsystemFamilies\Index.cshtml" />
+    <Content Include="Views\Options\Create.cshtml" />
+    <Content Include="Views\Options\Delete.cshtml" />
+    <Content Include="Views\Options\Details.cshtml" />
+    <Content Include="Views\Options\Edit.cshtml" />
+    <Content Include="Views\Options\Index.cshtml" />
+    <Content Include="Views\OptionValues\Create.cshtml" />
+    <Content Include="Views\OptionValues\Delete.cshtml" />
+    <Content Include="Views\OptionValues\Details.cshtml" />
+    <Content Include="Views\OptionValues\Edit.cshtml" />
+    <Content Include="Views\OptionValues\Index.cshtml" />
+    <Content Include="Views\TcSets\Create.cshtml" />
+    <Content Include="Views\TcSets\Delete.cshtml" />
+    <Content Include="Views\TcSets\Details.cshtml" />
+    <Content Include="Views\TcSets\Edit.cshtml" />
+    <Content Include="Views\TcSets\Index.cshtml" />
+    <Content Include="Views\TechnicalCharacteristics\Create.cshtml" />
+    <Content Include="Views\TechnicalCharacteristics\Delete.cshtml" />
+    <Content Include="Views\TechnicalCharacteristics\Details.cshtml" />
+    <Content Include="Views\TechnicalCharacteristics\Edit.cshtml" />
+    <Content Include="Views\TechnicalCharacteristics\Index.cshtml" />
+    <Content Include="Views\LsystemFamilies\ViewSystems.cshtml" />
+    <Content Include="Views\Options\ViewOptions.cshtml" />
+    <Content Include="Views\OptionValues\AddOptionValue.cshtml" />
+    <Content Include="Views\UserRights\Delete.cshtml" />
+    <Content Include="Views\UserRights\Details.cshtml" />
+    <Content Include="Views\UserRights\Edit.cshtml" />
+    <Content Include="Views\UserRights\Index.cshtml" />
+    <Content Include="Views\UserRights\_Creates.cshtml" />
+    <Content Include="Views\Options\ViewOptionvalues.cshtml" />
+    <Content Include="Views\TechnicalCharacteristics\ViewTCset.cshtml" />
+    <Content Include="Views\UserRights\ViewReaders.cshtml" />
+    <Content Include="Views\UserRights\ViewExporters.cshtml" />
+    <Content Include="Views\UserRights\ViewEditors.cshtml" />
+    <Content Include="Views\UserRights\ViewAdmins.cshtml" />
+    <Content Include="Views\SetValues\Create12.cshtml" />
+    <Content Include="Views\SetValues\Delete.cshtml" />
+    <Content Include="Views\SetValues\Details.cshtml" />
+    <Content Include="Views\SetValues\Edit.cshtml" />
+    <Content Include="Views\SetValues\Index.cshtml" />
+    <Content Include="Views\RevisionHistories\Create.cshtml" />
+    <Content Include="Views\RevisionHistories\Delete.cshtml" />
+    <Content Include="Views\RevisionHistories\Details.cshtml" />
+    <Content Include="Views\RevisionHistories\Edit.cshtml" />
+    <Content Include="Views\RevisionHistories\Index.cshtml" />
+    <Content Include="Views\SetValues\Createnew.cshtml" />
+    <Content Include="Views\SetValues\Create.cshtml" />
+    <Content Include="Views\OptionValues\ViewOptionValues.cshtml" />
+    <Content Include="Views\Lsystems\ViewSystemProperties.cshtml" />
+    <Content Include="Views\ConfigurationCollections\Create.cshtml" />
+    <Content Include="Views\ConfigurationCollections\Delete.cshtml" />
+    <Content Include="Views\ConfigurationCollections\Details.cshtml" />
+    <Content Include="Views\ConfigurationCollections\Edit.cshtml" />
+    <Content Include="Views\ConfigurationCollections\Index.cshtml" />
+    <Content Include="Views\Calculations\Create.cshtml" />
+    <Content Include="Views\Calculations\Delete.cshtml" />
+    <Content Include="Views\Calculations\Details.cshtml" />
+    <Content Include="Views\Calculations\Edit.cshtml" />
+    <Content Include="Views\Calculations\Index.cshtml" />
+    <Content Include="Views\ConfigurationCollections\Test1.cshtml" />
+    <Content Include="Views\Options\test1.cshtml" />
+    <Content Include="Views\LsystemFamilies\_Create.cshtml" />
+    <Content Include="Views\Calculations\ViewCalculations.cshtml" />
+    <Content Include="Views\Calculations\ViewCalculations1.cshtml" />
+    <Content Include="Views\Calculations\Calculate.cshtml" />
+    <Content Include="Views\Calculations\Calculate1.cshtml" />
+    <Content Include="Views\ConfigurationCollections\All.cshtml" />
+    <Content Include="Views\Config_OptionVal\Create.cshtml" />
+    <Content Include="Views\Config_OptionVal\Delete.cshtml" />
+    <Content Include="Views\Config_OptionVal\Details.cshtml" />
+    <Content Include="Views\Config_OptionVal\Edit.cshtml" />
+    <Content Include="Views\Config_OptionVal\Index.cshtml" />
+    <Content Include="Views\Calculations\Error.cshtml" />
+    <Content Include="Views\Config_OptionVal\Error.cshtml" />
+    <Content Include="Views\ConfigurationCollections\Error.cshtml" />
+    <Content Include="Views\DataFormats\Error.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\LsystemFamilies\Error.cshtml" />
+    <Content Include="Views\Lsystems\Error.cshtml" />
+    <Content Include="Views\Options\Error.cshtml" />
+    <Content Include="Views\OptionValues\Error.cshtml" />
+    <Content Include="Views\RevisionHistories\Error.cshtml" />
+    <Content Include="Views\SetValues\Error.cshtml" />
+    <Content Include="Views\TcSets\Error.cshtml" />
+    <Content Include="Views\TechnicalCharacteristics\Error.cshtml" />
+    <Content Include="Views\UserRights\Error.cshtml" />
+    <Content Include="Views\ConfigurationCollections\ViewConfiguration.cshtml" />
+    <Content Include="Views\ConfigurationCollections\ListConfigurations.cshtml" />
+    <Content Include="Views\ConfigurationCollections\ListAllConfiguration.cshtml" />
+    <Content Include="Views\Views123\Create.cshtml" />
+    <Content Include="Views\Views123\Delete.cshtml" />
+    <Content Include="Views\Views123\Details.cshtml" />
+    <Content Include="Views\Views123\Edit.cshtml" />
+    <Content Include="Views\Views123\Index.cshtml" />
+    <Content Include="Views\ViewsProperties\Create.cshtml" />
+    <Content Include="Views\ViewsProperties\Delete.cshtml" />
+    <Content Include="Views\ViewsProperties\Details.cshtml" />
+    <Content Include="Views\ViewsProperties\Edit.cshtml" />
+    <Content Include="Views\ViewsProperties\Index.cshtml" />
+    <Content Include="Views\Views123\ViewSystemValues.cshtml" />
+    <Content Include="Views\Views123\DisplayViews.cshtml" />
+    <Content Include="Views\Views123\UseView.cshtml" />
+    <Content Include="Views\Views123\CopyView.cshtml" />
+    <Content Include="Views\Shared\AuthorizationError.cshtml" />
+    <Content Include="Views\LsystemFamilies\SystemIndependentOptions.cshtml" />
+    <Content Include="Views\ImportSAP\Index.cshtml" />
+    <Content Include="Views\ImportSAP\FileUpload.cshtml" />
+    <Content Include="Views\ImportSAP\DisplayFromFile.cshtml" />
+    <Content Include="Views\ImportSAP\Compare.cshtml" />
+    <Content Include="Views\LsystemFamilies\XmlExport.cshtml" />
+    <Content Include="Views\Views123\TestView.cshtml" />
+    <Content Include="Views\TcSets\CopyProperty.cshtml" />
+    <Content Include="Views\LsystemFamilies\XmlExportFile.cshtml" />
+    <Content Include="Views\RevisionHistories\DateMismatchError.cshtml" />
+    <Content Include="Views\SetValues\Empty.cshtml" />
+    <Content Include="Views\Views123\ViewsResult.cshtml" />
+    <Content Include="Views\Views123\ViewsResultsWithout.cshtml" />
+    <Content Include="Views\Views123\Empty.cshtml" />
+    <Content Include="Views\Views123\ViewSummarize.cshtml" />
+    <Content Include="Views\DataFormats\DataFormatEdit.cshtml" />
+    <Content Include="Views\ImportSAP\Upload.cshtml" />
+    <Content Include="Views\ImportSAP\ImportSAP.cshtml" />
+    <Content Include="Views\ImportSAP\CompareSystem.cshtml" />
+    <Content Include="Views\ImportSAP\CompareOption.cshtml" />
+    <Content Include="Views\ImportSAP\CompareOptionValues.cshtml" />
+    <Content Include="Views\ImportSAP\OptionCreate.cshtml" />
+    <Content Include="Views\ImportSAP\OptionValueCreate.cshtml" />
+    <Content Include="Views\ConfigurationCollections\DisplayAll.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\Excel Files\" />
+    <Folder Include="Content\xmlfiles\" />
+    <Folder Include="ViewModels\TcSetVM\" />
+    <Folder Include="ViewModels\UserRights\" />
+    <Folder Include="Views\Test\" />
+    <Folder Include="XML files\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511160715366_InitialCreate.resx">
+      <DependentUpon>201511160715366_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511250937485_FromSAP.resx">
+      <DependentUpon>201511250937485_FromSAP.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50976</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50976/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

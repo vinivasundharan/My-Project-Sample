@@ -1,0 +1,60 @@
+﻿@model TEDALS_Ver01.ViewModels.LsystemFamily_Lsystem
+@{
+    ViewBag.Title = "View Systems";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>View Systems</li>
+</ul>
+
+<h2>Systems</h2>
+
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+        <li>@Html.ActionLink("View System Independent Option", "ViewOptions", "Options", new { id = 1038 }, null)</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+        <li>@Html.ActionLink("Export All system Families", "ExportAll", "LsystemFamilies")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <h4>Family Name : @ViewBag.FamilyName</h4>
+    <table class="table">
+        <tr>
+            <th>System Name</th>
+            <th>Material Type</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.Lsystems)
+        {
+            <tr>
+                <td data-toggle="tooltip" title="@item.DescriptionDE">
+                    @Html.ActionLink(item.LsystemName, "ViewOptions", "Options", new { id = item.LsystemID }, null)
+                </td>
+                <td>
+                    @item.MaterialNumber
+                </td>
+                <td>
+                    @*@Html.ActionLink("View Options", "ViewOptions", "Options", new { id = item.LsystemID }, null)|*@
+                    @*@Html.ActionLink("Add option", "Create", "Options", new { id = item.LsystemID }, null)|*@
+
+                    @Html.ActionLink("Edit", "Edit", "Lsystems", new { id = item.LsystemID }, null) |
+                    @Html.ActionLink("Details", "Details", "Lsystems", new { id = item.LsystemID }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Lsystems", new { id = item.LsystemID }, null) |
+                    @Html.ActionLink("View Calculations", "ViewCalculations", "Calculations", new { id=item.LsystemID},null) |
+                    @Html.ActionLink("View all configurations", "DisplayAll", "ConfigurationCollections", new { id=item.LsystemID},null)
+                </td>
+            </tr>
+        }
+    </table>
+    <hr />
+    @Html.ActionLink("Add new System", "Create", "Lsystems", new { id =ViewBag.id},null)
+    <br />
+    @Html.ActionLink("Back to List","Index","LsystemFamilies")
+</div>
+

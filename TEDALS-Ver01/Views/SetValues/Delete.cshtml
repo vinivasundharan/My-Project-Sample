@@ -1,0 +1,68 @@
+﻿@model TEDALS_Ver01.Models.SetValue
+
+@{
+    ViewBag.Title = "Delete Property";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>@Html.ActionLink("Systems", "Index", "Lsystems")</li>
+    <li>@Html.ActionLink("Options", "Index", "Options")</li>
+    <li>@Html.ActionLink("Option Values", "Index", "OptionValues")</li>
+    <li>@Html.ActionLink("Properties", "Index", "SetValues", new { id = Model.OptionValueID }, null)</li>
+    <li> Delete System Properties</li>
+</ul>
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Set Value</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OptionValue.OptionVal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OptionValue.OptionVal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TcSet.SetName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TcSet.SetName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>*@
+
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index", "SetValues", new { id =@Model.OptionValueID},null)
+        </div>
+    }
+</div>

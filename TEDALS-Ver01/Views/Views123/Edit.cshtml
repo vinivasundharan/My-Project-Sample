@@ -1,0 +1,137 @@
+﻿@model TEDALS_Ver01.ViewModels.EditViewsVM
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Views", "Index", "Views123")</li>
+    <li>Edit</li>
+</ul>
+
+<h2>Edit View</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View all views", "Index", "Views123")</li>
+        <li>@Html.ActionLink("Add View", "Create", "Views123")</li>
+        <li>@Html.ActionLink("View all systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+<div class="col-md-10">
+
+    @using (Html.BeginForm("Edit", "Views123", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Views</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Views12.ViewsID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Views12.ViewsName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Views12.ViewsName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Views12.ViewsName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Views12.DescriptionEN, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Views12.DescriptionEN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Views12.DescriptionEN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Views12.DescriptionDE, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Views12.DescriptionDE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Views12.DescriptionDE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @foreach (var tc in ViewBag.TC)
+            {
+                <div class="col-md-3">
+                    <table>
+                        <tr><th><h4 style="word-wrap:break-word;word-break:break-all">@tc.TCName</h4></th></tr>
+
+                        @foreach (var item in tc.TcSets)
+                        {
+                            if (Model.TcSet.Any(x => x.SetName.Equals(item.SetName)))
+                            {
+                                <tr><td><input type="checkbox" value="@item.TcSetID" name="TcSetID" checked />   @item.SetName</td></tr>
+                            }
+
+                            else
+                            {
+                                <tr><td><input type="checkbox" value="@item.TcSetID" name="TcSetID" />   @item.SetName</td></tr>
+                            }
+
+
+
+                        }
+                    </table>
+                    <br />
+                    <br />
+                    <br />
+                </div>
+            }
+            <div class="col-md-10">
+                <hr />
+                <h4>Available Calculations</h4>
+                <table class="table">
+                    <tr>
+                        <th></th>
+                        <th>Calculation Name</th>
+                        <th>Calculation Formula</th>
+                        <th>Description English</th>
+                        <th>Description German</th>
+                    </tr>
+                    @foreach (var item in ViewBag.Calculation)
+                    {
+                        if (Model.Calculation.Any(x => x.CalculationID == item.CalculationID))
+                        {
+                            <tr>
+                                <td><input type="checkbox" value="@item.CalculationID" name="CalcID" checked /></td>
+                                <td>@item.CalculationName</td>
+                                <td>@item.CalculationFormula</td>
+                                <td>@item.DescriptionEN</td>
+                                <td>@item.DescriptionDE</td>
+
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td><input type="checkbox" value="@item.CalculationID" name="CalcID" /></td>
+                                <td>@item.CalculationName</td>
+                                <td>@item.CalculationFormula</td>
+                                <td>@item.DescriptionEN</td>
+                                <td>@item.DescriptionDE</td>
+
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

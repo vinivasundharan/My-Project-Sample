@@ -1,0 +1,62 @@
+﻿@model IEnumerable<TEDALS_Ver01.Models.Lsystem>
+
+@{
+    ViewBag.Title = "System";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>Existing Systems</li>
+</ul>
+
+<h2>All systems</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+        <li>@Html.ActionLink("View System Independent Option", "ViewOptions", "Options", new { id=1038},null)</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LsystemFamily.FamilyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LsystemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialNumber)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.LsystemFamily.FamilyName, "ViewSystems", "LsystemFamilies", new { id= item.LsystemFamilyID},null)
+                </td>
+                <td data-toggle="tooltip" title="@item.DescriptionDE">
+                    @Html.DisplayFor(modelItem => item.LsystemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaterialNumber)
+                </td>
+                <td>
+                    @Html.ActionLink("View Options", "ViewOptions", "Options", new { id = item.LsystemID},null)|
+                    @Html.ActionLink("Edit", "Edit", new { id = item.LsystemID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.LsystemID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.LsystemID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

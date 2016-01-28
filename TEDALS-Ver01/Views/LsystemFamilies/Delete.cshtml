@@ -1,0 +1,106 @@
+﻿@model TEDALS_Ver01.Models.LsystemFamily
+
+@{
+    ViewBag.Title = "Delete System family";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>Delete @Model.FamilyName</li>
+</ul>
+
+<h2>Delete @Model.FamilyName</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+        <li>@Html.ActionLink("View System Independent Option", "ViewOptions", "Options", new { id = 1038 }, null)</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+        <li>@Html.ActionLink("Export All system Families", "ExportAll", "LsystemFamilies")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FamilyName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FamilyName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LsystemCount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LsystemCount)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DescriptionEN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DescriptionEN)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DescriptionDE)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DescriptionDE)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedBy)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</div>

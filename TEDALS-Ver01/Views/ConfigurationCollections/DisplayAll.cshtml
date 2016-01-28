@@ -1,0 +1,74 @@
+﻿@model List<TEDALS_Ver01.ViewModels.ConfigurationCollection.ConfigAllList>
+@{
+    ViewBag.Title = "DisplayAll";
+}
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Configurations", "Index", "ConfigurationCollections")</li>
+    <li>View all Configuration</li>
+</ul>
+
+<h2>All Configurations</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("View all Configuration", "Index", "ConfigurationCollections")</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <table class="table">
+        <tr>
+            <th>Collection Name</th>
+            @foreach (var item in ViewBag.Option)
+            {
+                <th>@item.OptionName</th>
+            }
+            @foreach (var item in ViewBag.Independent)
+            {
+                <th style="background-color:#9898AB">@item.OptionName</th>
+            }
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ConfigurationName
+                </td>
+                @foreach (var op in item.OpOvList)
+                {
+                    <td>
+
+                        @foreach (var ov in op.Optionvalue)
+                        {
+                            if (ov == "No Value")
+                            {
+                                <p style="color:#EF1F1F"> @ov<br /></p>
+                            }
+                            else
+                            {
+                                <p>@ov <br /></p>
+                            }
+
+                        }
+
+                    </td>
+                }
+                <td>@Html.ActionLink("Edit", "Edit", "ConfigurationCollections", new { id = item.ConfigID }, null) | @Html.ActionLink("Delete", "Delete", "ConfigurationCollections", new { id = item.ConfigID }, null)</td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="col-md-10">
+    <p>
+        <hr />
+
+        @Html.ActionLink("Add new Configuration", "Create", "ConfigurationCollections", new { LsystemID = @ViewBag.LsystemID }, null)
+        <br />
+        @Html.ActionLink("Back to List", "ViewSystems", "LsystemFamilies", new { id = @ViewBag.LsystemFamilyID }, null)
+    </p>
+</div>

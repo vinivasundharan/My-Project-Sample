@@ -1,0 +1,76 @@
+﻿@model TEDALS_Ver01.ViewModels.TC_TcSet
+@{
+    ViewBag.Title = "View TC Properties";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+    <li>Technical Characteristics properties</li>
+</ul>
+<h2>Technical Characteristic Properties</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("Add New Technical Characteristics", "Create", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("View Data Formats", "Index", "DataFormats")</li>
+        <li>@Html.ActionLink("Add new Data Formats", "Create", "DataFormats")</li>
+
+    </ul>
+</div>
+<div class="col-md-10">
+    <h4>Technical Characteristic : @ViewBag.TC</h4>
+
+
+    <table class="table">
+        <tr>
+            <th>Property Name</th>
+            <th>Data Format</th>
+            <th>Physical Unit</th>
+            <th>Data Usage</th>
+            <th>Data Status</th>
+            <th>Description in German</th>
+            <th>Description in English</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.TcSet)
+        {
+            <tr>
+                <td>
+                    @item.SetName
+                </td>
+                <td>
+                    @item.DataFormat.FormatName
+                </td>
+                <td>
+                    @item.PhysicalUnit
+                </td>
+                <td>
+                    @item.DataUsage
+                </td>
+                <td>
+                    @item.DataStatus
+                </td>
+                <td>
+                    @item.DescriptionDE
+                </td>
+                <td>
+                    @item.DescriptionEN
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "TcSets", new { id = item.TcSetID }, null)|
+                    @Html.ActionLink("Details", "Details", "TcSets", new { id = item.TcSetID }, null)|
+                    @Html.ActionLink("Delete", "Delete", "TcSets", new { id = item.TcSetID }, null)
+                </td>
+            </tr>
+        }
+    </table>
+    <hr />
+    @Html.ActionLink("Add Properties", "Create", "TcSets", new { id = ViewBag.id }, null)
+    <br />
+    @Html.ActionLink("Copy Properties", "CopyProperty", "TcSets", new { id=ViewBag.id},null)
+    <br />
+    @Html.ActionLink("Back to List","Index","TechnicalCharacteristics")
+    
+    
+</div>

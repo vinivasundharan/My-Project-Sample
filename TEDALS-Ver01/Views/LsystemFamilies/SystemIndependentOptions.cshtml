@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "System Independent Options";
+}
+<div>
+    <br />
+    <br />
+    <h2 class="text-danger" style="background-color:#BAC3DB">Error encountered</h2>
+    <br />
+    <br />
+    <div style="background-color:#7A96AD">
+
+        <br />
+        <b>&nbsp;&nbsp;  There are no Systems to be displayed. Use the navigation pane below to navigate. </b>
+        <br /><br />
+        <div>
+            
+            <ul class="nav nav-pills" style="background-color:ghostwhite ;  align-items:center">
+                <li >@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+                <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+                <li>@Html.ActionLink("View System Independent Option", "ViewOptions", "Options", new { id = 1038 }, null)</li>
+                <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+            </ul>
+        </div>
+        <br />
+    </div>
+    
+</div>
+

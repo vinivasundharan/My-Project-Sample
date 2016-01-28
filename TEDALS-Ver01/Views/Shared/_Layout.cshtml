@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - TeDaLs</title>
+    @*<link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />*@
+    
+    
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("head", required: false)
+    <style type="text/css">
+        #IdentityName {
+            margin-right: -300px;
+            color : #255C89;
+            font-family:Verdana;
+        }
+        #HeadingName >a {
+            margin-left : -100px;
+            color:ghostwhite;
+            /*font-size : 50px;*/
+        }
+        .navbar-brand>img{
+            /*margin-left :-300px;
+            max-height:100%;
+            height :100%;
+            width :auto;
+            margin :0 auto;*/
+            width:110px;
+            height:50px;
+            display:inline-block;
+            margin-top:-25px;
+            margin-left:-300px;
+            margin-bottom:-25px;
+            /*padding-top: 
+            padding-bottom :*/
+        }
+        /*.navbar-brand{
+            color:whitesmoke;
+        }*/
+        .navbar.navbar-inverse.navbar-fixed-top{
+            background-color:#255C89 !important;
+        }
+        /*.nav-tabs>li>a{
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            
+            
+        }*/
+
+    </style>
+</head>
+
+
+<body>
+    
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            @*<div id="boschLogo"><a href="http://www.bosch.de/de/de/startpage_1/country-landingpage.php"><img src="http://www.bosch.de/media/_tech/layout/images/logos/bosch_logo_german.png" alt="Bosch - Technik fürs Leben" title="Bosch - Technik fürs Leben" border="0" height="63" width="128"></a></div>*@
+            <div class="navbar-header" id="HeadingName">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">
+                    <img src="~/Images/bosch website logo.png" /></a>
+                @Html.ActionLink("TeDaLs", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav nav-tabs">
+                    <li id="link">@Html.ActionLink("System Family", "Index", "LsystemFamilies")</li>
+                    <li id="link">@Html.ActionLink("Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+                    @*<li id="link">@Html.ActionLink("System Independent Options", "Index", "SystemIndependentOptions")</li>*@
+                    <li id="link">@Html.ActionLink("Views", "Index", "Views123")</li>
+                    <li id="link">@Html.ActionLink("Configuration Collection","Index","ConfigurationCollections")</li>
+                    <li id="link">@Html.ActionLink("Calculations", "Index", "Calculations")</li>
+                    <li id="link">@Html.ActionLink("Revision History", "Index", "RevisionHistories")</li>
+                    <li id="link">@Html.ActionLink("Import SAP", "ImportSAP", "ImportSAP")</li>
+                    <li id="link">@Html.ActionLink("User Rights", "Index", "UserRights")</li>
+                </ul>
+                <p style="margin-right:-250px" class="nav navbar-text navbar-right">Signed in as: @User.Identity.Name!</p>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+
+    </div>
+    <hr />
+    <footer>
+
+        <p>&copy; Bosch Rexroth</p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+   
+
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+    
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/Content/bootstrap-datepicker.min.js")*@
+   
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+
+@*style="margin-right:-200px"*@

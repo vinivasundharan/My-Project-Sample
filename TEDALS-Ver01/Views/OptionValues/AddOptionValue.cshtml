@@ -1,0 +1,42 @@
+﻿@model TEDALS_Ver01.ViewModels.AddOptionValue
+@{
+    ViewBag.Title = "AddOptionValue";
+}
+
+<h2>Add Option Value</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <table class="table">
+        <tr>
+            <th> Option Name</th>
+            <td>@Model.Option.OptionName</td>
+            <th></th>
+        </tr>
+        <tr>
+            <th> Technical Characteristic</th>
+            <td>@Model.TechnicalCharacteristic.TCName</td>
+            <th></th>
+        </tr>
+        @*<tr>
+                <td>@Model.Option.OptionName</td>
+                <td>@Model.TechnicalCharacteristic.TCName</td>
+            </tr>*@
+        @foreach (var item in Model.TcSets)
+        {
+            <tr>
+
+                <td>@item.SetName</td>
+                <td>@Html.EditorFor(model => model.SetValue.Value, new { htmlAttributes = new { @class = "form-control" } })</td>
+                <td>@Html.EditorFor(model => model.SetValue.Status, new { htmlAttributes = new { @class = "form-control" } })</td>
+            </tr>
+        }
+
+    </table>
+</div>

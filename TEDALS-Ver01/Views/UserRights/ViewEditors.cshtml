@@ -1,0 +1,88 @@
+﻿@model IEnumerable<TEDALS_Ver01.Models.UserRight>
+@using TEDALS_Ver01.Models
+@{
+    ViewBag.Title = "View Editors";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Users", "Index", "UserRights")</li>
+    <li>Editors</li>
+</ul>
+
+<h2>Users</h2>
+
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View all users", "Index", "UserRights")</li>
+        <li>@Html.ActionLink("Add User", "Create", "UserRights")</li>
+        <li>@Html.ActionLink("View all readers", "ViewReaders", "UserRights")</li>
+        <li>@Html.ActionLink("View all Editors", "ViewEditors", "UserRights")</li>
+        <li>@Html.ActionLink("View all Exporters", "ViewExporters", "UserRights")</li>
+        <li>@Html.ActionLink("View all Admins", "ViewAdmins", "UserRights")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsReader)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsEditor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsExporter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAdmin)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.IsEditor)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsReader)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsEditor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsExporter)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsAdmin)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.UserRightID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.UserRightID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.UserRightID })
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+    <hr />
+    @Html.ActionLink("Back to List", "Index", "UserRights")
+</div>

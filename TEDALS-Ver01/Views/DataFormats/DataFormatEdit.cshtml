@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Error Data Format";
+}
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+    <li>@Html.ActionLink("Data Formats", "Index", "DataFromats")</li>
+    <li>Edit Data format</li>
+</ul>
+<h2>@ViewBag.Message</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("Add New Technical Characteristics", "Create", "TechnicalCharacteristics")</li>
+        <li>@Html.ActionLink("View Data Formats", "Index", "DataFormats")</li>
+        <li>@Html.ActionLink("Add new Data Formats", "Create", "DataFormats")</li>
+    </ul>
+</div>
+<div class="col-md-10">
+    <h2 class="text-danger" style="background-color:#BAC3DB">Edit not possible</h2>
+    <h4>The selected Data format is used in the following Technical Characteristic Properties</h4>
+    <table class="table">
+        <tr>
+            <th>Property name</th>
+            
+            <th>Description English</th>
+            <th>Description German</th>
+        </tr>
+        @foreach(var item in ViewBag.Tclist)
+        {
+            <tr>
+                <td>@item.SetName</td>
+                <td>@item.DescriptionEN</td>
+                <td>@item.DescriptionDE</td>
+            </tr>
+        }
+    </table>
+</div>

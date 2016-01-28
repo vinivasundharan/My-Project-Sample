@@ -1,0 +1,130 @@
+﻿@model TEDALS_Ver01.Models.ConfigurationCollection
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Configurations","Index","ConfigurationCollections")</li>
+    <li>Add configuration</li>
+</ul>
+<h2>Add new Configuration</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("View all Configuration", "Index", "ConfigurationCollections")</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    @*@using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @*<div class="form-group">
+                <div class="col-md-2"> System Family</div>
+
+                <div class="col-md-10">
+                    @Html.DropDownList("LsystemFamilyID", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>*@
+    @*<div class="form-group">
+                @Html.LabelFor(model => model.LsystemID, "LsystemID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("LsystemID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LsystemID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <input type="submit" value="Filter" class="btn btn-default" />
+        }*@
+    <h4>Family Name : @Model.Lsystem.LsystemFamily.FamilyName</h4>
+    <h4>System Name : @Model.Lsystem.LsystemName</h4>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.CollectionName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CollectionName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CollectionName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <table class="table">
+                    <colgroup>
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 80%;">
+
+                    </colgroup>
+                    <tr style="column-width:20px">
+                        <th>Option</th>
+                        <th>Option value</th>
+                        
+                    </tr>
+                    @foreach (var item in Model.Options)
+                    {
+                        <tr>
+                            <td><b>@item.OptionName</b></td>
+                            <td>
+                                <table class="table" style="background-color:beige">
+                                    <colgroup>
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 40%;">
+                                        <col span="1" style="width:40%" />
+                                    </colgroup>
+                                    
+                                        @foreach (var ov in item.OptionValues.OrderBy(x => x.OptionVal))
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="OptionValues" id="OptionValues" value="@ov.OptionValueID" />@ov.OptionVal
+                                                </td>
+                                                <td>@ov.DescriptionEN</td>
+                                                <td>@ov.DescriptionDE</td>
+                                            </tr>
+                                        }
+                                        
+                                </table>
+
+                            </td>
+
+
+                        </tr>
+
+                    }
+                </table>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DescriptionEN, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DescriptionEN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DescriptionEN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DescriptionDE, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DescriptionDE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DescriptionDE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "ListAllConfiguration", "ConfigurationCollections", new { id = Model.LsystemID},null)
+    </div>
+</div>

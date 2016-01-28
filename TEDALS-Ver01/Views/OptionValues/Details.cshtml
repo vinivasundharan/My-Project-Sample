@@ -1,0 +1,81 @@
+﻿@model TEDALS_Ver01.Models.OptionValue
+
+@{
+    ViewBag.Title = "Option Value Details";
+}
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("System family", "Index", "LsystemFamilies")</li>
+    <li>@Html.ActionLink("Systems", "Index", "Lsystems")</li>
+    <li>@Html.ActionLink("Options", "Index", "Options")</li>
+    <li>Add option Value</li>
+</ul>
+
+<h2>Details</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View System Families", "Index", "LsystemFamilies")</li>
+        <li>@Html.ActionLink("Add New System Family", "Create", "Lsystemfamilies")</li>
+        <li>@Html.ActionLink("View System Independent Option", "ViewOptions", "Options", new { id = 1038 }, null)</li>
+        <li>@Html.ActionLink("View all Systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <h4>Family Name : @Model.Option.Lsystem.LsystemFamily.FamilyName</h4>
+    <h4>System Name : @Model.Option.Lsystem.LsystemName</h4>
+    <h4>Option : @Model.Option.OptionName</h4>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+           
+
+            <dt>
+                @Html.DisplayNameFor(model => model.OptionVal)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OptionVal)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedBy)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedOn)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.OptionValueID }) |
+        @Html.ActionLink("Back to List", "ViewOptionvalues", "OptionValues", new { id = Model.OptionID},null)
+    </p>
+</div>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TEDALS_Ver01.Models.Views>
+
+@{
+    ViewBag.Title = "Views";
+}
+
+
+
+<ul class="breadcrumb">
+    You are Here :
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+    <li>Views</li>
+</ul>
+
+<h2> Views</h2>
+<div class="col-md-2">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("View all views", "Index", "Views123")</li>
+        <li>@Html.ActionLink("Add View", "Create", "Views123")</li>
+        <li>@Html.ActionLink("View all systems", "Index", "Lsystems")</li>
+    </ul>
+</div>
+<div class="col-md-10">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewsName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionEN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionDE)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(@item.ViewsName, "DisplayViews", "Views123", new { id = @item.ViewsID }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionEN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionDE)
+                </td>
+                <td>
+                    @Html.ActionLink("Use a View", "UseView", "Views123", new { id = item.ViewsID }, null)  | 
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ViewsID })  |
+                    @Html.ActionLink("Details", "Details", new { id = item.ViewsID })  |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ViewsID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+</div>
