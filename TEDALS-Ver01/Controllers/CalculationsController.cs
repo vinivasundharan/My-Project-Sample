@@ -26,6 +26,7 @@ namespace TEDALS_Ver01.Controllers
         {
             try
             {
+
                 var calculation = db.Calculation.Include(c => c.DataFormat);
                 calculation = calculation.OrderBy(x => x.CalculationName);
                 return View(calculation.ToList());
