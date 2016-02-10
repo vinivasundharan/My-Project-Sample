@@ -359,7 +359,19 @@ namespace TEDALS_Ver01.Controllers
                         tcSet.TechnicalCharacteristic = db.TechnicalCharacteristic.FirstOrDefault(x => x.TechnicalCharacteristicID == tcSet.TechnicalCharacteristicID);
                         return View(tcSet);
                     }
-                    foreach(var set in db.TcSet.Where(x=>x.SetName==tcSet.SetName&&x.TcSetID!=tcSet.TcSetID))
+                    var original = db.TcSet.Find(tcSet.TcSetID);
+                    bool dataFormatChange = original.DataFormatID != tcSet.DataFormatID;
+                    string olddataformat = original.DataFormat.FormatName;
+                    string dataformat = db.DataFormat.FirstOrDefault(x => x.DataFormatID == tcSet.DataFormatID).FormatType;
+                    if(dataFormatChange&& olddataformat=="String" && db.SetValue.Any(x=>x.TcSet.SetName==tcSet.SetName))
+                    {
+                        ModelState.AddModelError("", "Data format cannot be changed from String to Number as there are Values defined using this Data Format");
+                        ViewBag.DataFormatID = new SelectList(db.DataFormat.OrderBy(x => x.FormatName), "DataFormatID", "FormatName", tcSet.DataFormatID);
+                        ViewBag.TechnicalCharacteristicID = new SelectList(db.TechnicalCharacteristic.OrderBy(x => x.TCName), "TechnicalCharacteristicID", "TCName", tcSet.TechnicalCharacteristicID);
+                        tcSet.TechnicalCharacteristic = db.TechnicalCharacteristic.FirstOrDefault(x => x.TechnicalCharacteristicID == tcSet.TechnicalCharacteristicID);
+                        return View(tcSet);
+                    }
+                    foreach(var set in db.TcSet.Where(x=>x.SetName==tcSet.SetName))
                     {
                         set.ModifiedBy = User.Identity.Name;
                         set.ModifiedOn = DateTime.Now;
@@ -378,11 +390,35 @@ namespace TEDALS_Ver01.Controllers
                         db.Entry(set).Property(x => x.TechnicalCharacteristicID).IsModified = false;
 
                     }
-                    tcSet.ModifiedOn = DateTime.Now;
-                    tcSet.ModifiedBy = User.Identity.Name;
-                    db.Entry(tcSet).State = EntityState.Modified;
-                    db.Entry(tcSet).Property("CreatedBy").IsModified = false;
-                    db.Entry(tcSet).Property("CreatedOn").IsModified = false;
+                    //db.Entry(original).CurrentValues.SetValues(tcSet);
+                    //tcSet.ModifiedOn = DateTime.Now;
+                    //tcSet.ModifiedBy = User.Identity.Name;
+                    //db.Entry(original).State = EntityState.Modified;
+                    //db.Entry(original).Property("CreatedBy").IsModified = false;
+                    //db.Entry(original).Property("CreatedOn").IsModified = false;
+
+
+                    db.SaveChanges();
+
+                    if(dataFormatChange&&dataformat!="String")
+                    {
+                        foreach(var item in db.TcSet.Where(x=>x.TcSetID==original.TcSetID).ToList())
+                        {
+                            foreach(var setval  in db.SetValue.Where(x=>x.TcSetID==item.TcSetID).ToList())
+                            {
+                                var setvaluecontroller = new SetValuesController();
+                                string flag= setvaluecontroller.Edit(setval,User);
+                                if(flag!="Success")
+                                {
+                                    ModelState.AddModelError("", "There was error while updating the Values of the Properties");
+                                    ViewBag.DataFormatID = new SelectList(db.DataFormat.OrderBy(x => x.FormatName), "DataFormatID", "FormatName", tcSet.DataFormatID);
+                                    ViewBag.TechnicalCharacteristicID = new SelectList(db.TechnicalCharacteristic.OrderBy(x => x.TCName), "TechnicalCharacteristicID", "TCName", tcSet.TechnicalCharacteristicID);
+                                    tcSet.TechnicalCharacteristic = db.TechnicalCharacteristic.FirstOrDefault(x => x.TechnicalCharacteristicID == tcSet.TechnicalCharacteristicID);
+                                    return View(tcSet);
+                                }
+                            }
+                        }
+                    }
                     db.SaveChanges();
                     return RedirectToAction("ViewTcSet", "TechnicalCharacteristics", new { id = tcSet.TechnicalCharacteristicID });
                 }

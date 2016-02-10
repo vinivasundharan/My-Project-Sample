@@ -1,5 +1,5 @@
 ﻿body {
-    background-color:ghostwhite;
+    background-color:white;
 }
 
 @media (min-width: 1920px) {
@@ -63,20 +63,20 @@ th{
 .breadcrumb{
     background-color:#BAC3DB;
 }
-.breadcrumb > li + li::before {
-    padding: 0px 5px;
-    color:black;
-    content: "/";
-
+    .breadcrumb > li + li::before {
+        padding: 0px 5px;
+        color: black;
+        content: "/";
+    }
         #link{display:block;}
         #link >a{
-            color:ghostwhite;
+            color:white;
             font-family:Verdana;
             
         }
             #link>a:hover{
-            background-color:#7A96AD;
-            color:ghostwhite;
+            background-color:white;
+            color:black;
             border:none;
             
         }
@@ -88,3 +88,9 @@ th{
             border-color:transparent;
             
         }
+
+
+/*#NavigationBar>li>a:hover{
+    background-color:white;
+            color:black;
+}*/

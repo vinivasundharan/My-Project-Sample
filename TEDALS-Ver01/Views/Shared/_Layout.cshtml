@@ -31,7 +31,7 @@
             height:50px;
             display:inline-block;
             margin-top:-25px;
-            margin-left:-300px;
+            margin-left:-280px;
             margin-bottom:-25px;
             /*padding-top: 
             padding-bottom :*/
@@ -40,8 +40,10 @@
             color:whitesmoke;
         }*/
         .navbar.navbar-inverse.navbar-fixed-top{
-            background-color:#255C89 !important;
+            background-color:#264461  !important;
         }
+
+
         /*.nav-tabs>li>a{
             font-family:Verdana, Geneva, Tahoma, sans-serif;
             
@@ -64,11 +66,11 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="">
-                    <img src="~/Images/bosch website logo.png" /></a>
+                    <img src="~/Images/rexroth3.jpg" /></a>
                 @Html.ActionLink("TeDaLs", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav nav-tabs">
+                <ul class="nav navbar-nav nav-tabs" id="NavigationBar">
                     <li id="link">@Html.ActionLink("System Family", "Index", "LsystemFamilies")</li>
                     <li id="link">@Html.ActionLink("Technical Characteristics", "Index", "TechnicalCharacteristics")</li>
                     @*<li id="link">@Html.ActionLink("System Independent Options", "Index", "SystemIndependentOptions")</li>*@
@@ -79,7 +81,7 @@
                     <li id="link">@Html.ActionLink("Import SAP", "ImportSAP", "ImportSAP")</li>
                     <li id="link">@Html.ActionLink("User Rights", "Index", "UserRights")</li>
                 </ul>
-                <p style="margin-right:-250px" class="nav navbar-text navbar-right">Signed in as: @User.Identity.Name!</p>
+                <p style="margin-right:-250px; color:white" class="nav navbar-text navbar-right">Signed in as: @User.Identity.Name!</p>
             </div>
         </div>
     </div>

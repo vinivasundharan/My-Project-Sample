@@ -322,6 +322,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Images\bosch website logo.png" />
     <Content Include="Images\iouioiu.png" />
+    <Content Include="Images\rexroth1.jpg" />
+    <Content Include="Images\rexroth2.jpg" />
+    <Content Include="Images\rexroth3.jpg" />
     <Content Include="Images\ztzu.png" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -512,6 +515,7 @@
     <Content Include="Views\ImportSAP\OptionCreate.cshtml" />
     <Content Include="Views\ImportSAP\OptionValueCreate.cshtml" />
     <Content Include="Views\ConfigurationCollections\DisplayAll.cshtml" />
+    <Content Include="Views\SetValues\EditAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Excel Files\" />

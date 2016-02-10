@@ -152,9 +152,11 @@
             @foreach (var tc in Model.TechnicalCharacteristic.TcSets.OrderBy(x => x.SetName))
             {
 
-                <th>
+                <th data-toggle="tooltip" title="@tc.DescriptionDE">
 
                     @tc.SetName
+                    <br />
+                   [@tc.PhysicalUnit]
 
 
                 </th>
@@ -166,12 +168,12 @@
         {
             var link = false;
             <tr>
-                <th>@ov.OptionVal</th>
+                <th>@ov.OptionVal - @ov.DescriptionDE</th>
                 @foreach (var s in Model.TechnicalCharacteristic.TcSets.OrderBy(x => x.SetName))
                 {
 
                     int count = 1;
-                    
+
                     foreach (var sv in ov.SetValue)
                     {
 
@@ -179,6 +181,7 @@
                         {
                             count = 0;
                             <td>@sv.Value</td>
+                            @*<td>@Html.ActionLink(@sv.Value, "Edit", "SetValues", new { id = sv.SetValueID },null)</td>*@
                         }
 
                         @*else
@@ -198,6 +201,10 @@
                 @if(link==true)
                 {
                     <td>@Html.ActionLink("Add missing properties", "Create", "SetValues", new {@id=ov.OptionValueID },null)</td>
+                }
+                else
+                {
+                    <td>@Html.ActionLink("Edit Option value", "Edit", "OptionValues", new { @id = ov.OptionValueID }, null)</td>
                 }
 
             </tr>

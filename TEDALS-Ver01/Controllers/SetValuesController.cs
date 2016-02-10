@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Principal;
 using System.Web.Mvc;
 using TEDALS_Ver01.DAL;
 using TEDALS_Ver01.Models;
@@ -194,6 +195,7 @@ namespace TEDALS_Ver01.Controllers
                 ViewBag.Lsystem = opv.Option.Lsystem.LsystemName;
                 ViewBag.FamilyName = opv.Option.Lsystem.LsystemFamily.FamilyName;
                 ViewBag.OptionValID = id;
+                ViewBag.Description = opv.DescriptionDE;
                 ViewBag.OptionID = opv.OptionID;
                 var setValue = db.SetValue.Where(x => x.OptionValueID == id).OrderBy(x => x.TcSet.SetName);
                 ViewBag.CopyID = new SelectList(db.OptionValue.Where(x => x.OptionID == opid).OrderBy(x => x.OptionVal), "OptionValueID", "OptionVal");
@@ -570,7 +572,7 @@ namespace TEDALS_Ver01.Controllers
                         if(item.Value!="#"&& df.FormatType!="String" )
                         {
                             
-                            if(precision!=null)
+                            if(precision!=null && value>=0)
                             {
                                 int precision1 = precision ?? default(int);
                                 if (precision1 == 0)
@@ -579,7 +581,7 @@ namespace TEDALS_Ver01.Controllers
                                     valuestring = Significant(value, precision1);
 
                             }
-                            else if(scaling!=null)
+                            else if(scaling!=null && value>=0)
                             {
                                 int sca = scaling ?? default(int);
                                 valuestring = Scaling(value, sca);
@@ -668,6 +670,7 @@ namespace TEDALS_Ver01.Controllers
         {
             try
             {
+                
                 var opv = db.OptionValue.FirstOrDefault(x => x.OptionValueID == setValue.OptionValueID);
                 ViewBag.OptionValue = opv.OptionVal;
                 ViewBag.Option = opv.Option.OptionName;
@@ -700,7 +703,7 @@ namespace TEDALS_Ver01.Controllers
                     ViewBag.val = val;
 
                     double value;
-                    string valuestring ="";
+                    string valuestring =setValue.Value;
                     bool flag= double.TryParse(setValue.Value,out value);
                     if(setValue.Value!="#" && data!="String")
                     {
@@ -710,7 +713,7 @@ namespace TEDALS_Ver01.Controllers
                             return View(setValue);
 
                         }
-                        if(precision!=null)
+                        if(precision!=null && value>=0)
                         {
                             int precision1 = precision ?? default(int);
                             if (precision != 0)
@@ -718,7 +721,7 @@ namespace TEDALS_Ver01.Controllers
                             else
                                 valuestring = setValue.Value;
                         }
-                        else if(scaling!=null)
+                        else if(scaling!=null&& value>=0)
                         {
                             int sca = scaling ?? default(int);
                             valuestring = Scaling(value, sca);
@@ -747,6 +750,7 @@ namespace TEDALS_Ver01.Controllers
                         db.RevisionHistory.Add(rev);
                     }
                     original.ModifiedOn = DateTime.Now;
+                    
                     original.ModifiedBy = User.Identity.Name;
                     db.Entry(original).State = EntityState.Modified;
                     db.Entry(original).Property("CreatedOn").IsModified = false;
@@ -765,6 +769,251 @@ namespace TEDALS_Ver01.Controllers
                 ViewBag.Error = e.Message;
                 return View("Error");
             }
+        }
+
+        public string Edit(SetValue setValue, IPrincipal user=null)
+        {
+            try
+            {
+
+                var opv = db.OptionValue.FirstOrDefault(x => x.OptionValueID == setValue.OptionValueID);
+                var q1 = db.TcSet.FirstOrDefault(x => x.TcSetID == setValue.TcSetID);
+                if (ModelState.IsValid)
+                {
+                    var q = db.TcSet.FirstOrDefault(x => x.TcSetID == setValue.TcSetID);
+                    var data = q.DataFormat.FormatType;
+                    var precision = q.DataFormat.PrecisionDigits;
+                    var scaling = q.DataFormat.ScalingDigits;
+                    double val = 0;
+                    double value;
+                    string valuestring = setValue.Value;
+                    bool flag = double.TryParse(setValue.Value, out value);
+                    if (setValue.Value != "#" && data != "String")
+                    {
+                        if (!flag)
+                        {
+                            return "Error";
+
+                        }
+                        if (precision != null && value >= 0)
+                        {
+                            int precision1 = precision ?? default(int);
+                            if (precision != 0)
+                                valuestring = Significant(value, precision1);
+                            else
+                                valuestring = setValue.Value;
+                        }
+                        else if (scaling != null && value >= 0)
+                        {
+                            int sca = scaling ?? default(int);
+                            valuestring = Scaling(value, sca);
+                        }
+
+                    }
+                    setValue.Value = valuestring;
+                    var original = db.SetValue.Find(setValue.SetValueID);
+                    bool modified = original.Value != setValue.Value;
+                    if (modified)
+                    {
+                        //var old = db.RevisionHistory.FirstOrDefault(x => x.SetValueID == setValue.SetValueID);
+                        var rev = new RevisionHistory();
+                        rev.CreatedOn = original.ModifiedOn;
+                        rev.ModifiedOn = DateTime.Now;
+                        rev.ModifiedBy = user.Identity.Name;
+                        rev.InitialValue = original.Value; ;
+                        rev.Optionvalue = original.OptionValue.OptionVal;
+                        rev.TCSetName = original.TcSet.SetName;
+                        rev.Option = original.OptionValue.Option.OptionName;
+                        rev.SystemName = original.OptionValue.Option.Lsystem.LsystemName;
+                        rev.SetValueID = original.SetValueID;
+                        rev.ModifiedValue = setValue.Value;
+                        rev.Action = "Modified";
+                        db.Entry(original).CurrentValues.SetValues(setValue);
+                        db.RevisionHistory.Add(rev);
+                    }
+                    original.ModifiedOn = DateTime.Now;
+                    original.ModifiedBy = user.Identity.Name;
+                    db.Entry(original).State = EntityState.Modified;
+                    db.Entry(original).Property("CreatedOn").IsModified = false;
+                    db.Entry(original).Property("CreatedBy").IsModified = false;
+                    db.Entry(original).Property("OptionValueID").IsModified = false;
+                    db.Entry(original).Property("TcSetID").IsModified = false;
+
+                    db.SaveChanges();
+                    return "Success";
+                }
+                return "Error";
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.Message;
+                return "Error";
+            }
+
+        }
+
+        //Get Method
+        public ActionResult EditAll(int id)
+        {
+            try
+            {
+
+
+                if (db.UserRight.FirstOrDefault(x => x.UserCode == User.Identity.Name).IsAdmin || db.UserRight.FirstOrDefault(x => x.UserCode == User.Identity.Name).IsEditor)
+                {
+                    var opv = db.OptionValue.FirstOrDefault(x => x.OptionValueID == id);
+                    ViewBag.OptionValue = opv.OptionVal;
+                    ViewBag.Option = opv.Option.OptionName;
+                    ViewBag.Lsystem = opv.Option.Lsystem.LsystemName;
+                    ViewBag.FamilyName = opv.Option.Lsystem.LsystemFamily.FamilyName;
+                    ViewBag.id = opv.OptionValueID;
+                    var model = new List<SetValue>();
+                    model = db.SetValue.Where(x => x.OptionValueID == id).ToList();
+                    return View(model);
+                }
+                else
+                {
+                    return View("AuthorizationError");
+                }
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.Message;
+                return View("Error");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAll([Bind(Include = "SetValueID,Value,Status,TcSetID,OptionValueID")] List<SetValue> setValue)
+        {
+            try
+            {
+
+
+                int ovid1 = setValue[0].OptionValueID;
+                var opv = db.OptionValue.FirstOrDefault(x => x.OptionValueID == ovid1);
+                ViewBag.OptionValue = opv.OptionVal;
+                ViewBag.Option = opv.Option.OptionName;
+                ViewBag.Lsystem = opv.Option.Lsystem.LsystemName;
+                ViewBag.FamilyName = opv.Option.Lsystem.LsystemFamily.FamilyName;
+                ViewBag.id = opv.OptionValueID;
+                int ovid = 0;
+                bool error = false;
+                double val;
+                if (ModelState.IsValid)
+                {
+                    for (int i = 0; i < setValue.Count(); i++)
+                    {
+                        int setid = setValue[i].TcSetID;
+                        if (db.TcSet.FirstOrDefault(x => x.TcSetID == setid).DataFormat.FormatType == "Number" && setValue[i].Value != "#")
+                        {
+                            if (!double.TryParse(setValue[i].Value, out val))
+                            {
+                                error = true;
+                                Expression<Func<List<SetValue>, string>> exp = x => x[i].Value;
+                                string key = ExpressionHelper.GetExpressionText(exp);
+                                ModelState.AddModelError(key, "Value can only be a number or #");
+                                //int sd = setValue[i].OptionValueID;
+                                //var ov = db.OptionValue.Include(x => x.Option).FirstOrDefault(x => x.OptionValueID == sd);
+                                //var opid = ov.OptionID;
+                                //var op = db.Option.Include(x => x.TechnicalCharacteristic).FirstOrDefault(x => x.OptionID == opid);
+                                //var tcid = op.TechnicalCharacteristicID;
+                                //var tc = db.TechnicalCharacteristic.Include(x => x.TcSets).FirstOrDefault(x => x.TechnicalCharacteristicID == tcid);
+                                //var tcset = tc.TcSets;
+                                //ViewBag.OptionValueID = new SelectList(db.OptionValue, "OptionValueID", "OptionVal", setValue.OptionValueID);
+                            }
+                        }
+                     }
+
+                    
+                    if (error)
+                    {
+                        int count = setValue.Count();
+                        for (int j = 0; j < count; j++)
+                        {
+                            int setid = setValue[j].TcSetID;
+                            setValue[j].TcSet = db.TcSet.FirstOrDefault(x => x.TcSetID == setid);
+                        }
+                        return View(setValue);
+                    }
+
+                    foreach(var item in setValue)
+                    {
+                        var original = db.SetValue.Find(item.SetValueID);
+                        if(original.Value!=item.Value)
+                        {
+                            var tcsetid = item.TcSetID;
+                            var tcset = db.TcSet.FirstOrDefault(x => x.TcSetID == tcsetid);
+                            var dataformat = tcset.DataFormat;
+                            var precision = dataformat.PrecisionDigits;
+                            var scaling = dataformat.ScalingDigits;
+                            string valuestring = item.Value.ToString();
+                            double value;
+                            if(dataformat.FormatType!="String"&&item.Value!="#")
+                            {
+                                bool flag = double.TryParse(item.Value, out value);
+                                if (precision != null && value>=0)
+                                {
+                                    int precision1 = precision ?? default(int);
+                                    if (precision != 0)
+                                        valuestring = Significant(value, precision1);
+                                    else
+                                        valuestring = item.Value;
+                                }
+                                else if (scaling != null && value>=0)
+                                {
+                                    int sca = scaling ?? default(int);
+                                    valuestring = Scaling(value, sca);
+                                }
+                            }
+
+                            item.Value = valuestring;
+                            
+                        }
+                        bool modified = item.Value != original.Value;
+                        if (modified)
+                        {
+                            //var old = db.RevisionHistory.FirstOrDefault(x => x.SetValueID == setValue.SetValueID);
+                            var rev = new RevisionHistory();
+                            rev.CreatedOn = original.ModifiedOn;
+                            rev.ModifiedOn = DateTime.Now;
+                            rev.ModifiedBy = User.Identity.Name;
+                            rev.InitialValue = original.Value; ;
+                            rev.Optionvalue = original.OptionValue.OptionVal;
+                            rev.TCSetName = original.TcSet.SetName;
+                            rev.Option = original.OptionValue.Option.OptionName;
+                            rev.SystemName = original.OptionValue.Option.Lsystem.LsystemName;
+                            rev.SetValueID = original.SetValueID;
+                            rev.ModifiedValue = item.Value;
+                            rev.Action = "Modified";
+                            db.Entry(original).CurrentValues.SetValues(item);
+                            db.RevisionHistory.Add(rev);
+                            original.ModifiedOn = DateTime.Now;
+                            original.ModifiedBy = User.Identity.Name;
+                            db.Entry(original).State = EntityState.Modified;
+                            db.Entry(original).Property("CreatedOn").IsModified = false;
+                            db.Entry(original).Property("CreatedBy").IsModified = false;
+                            db.Entry(original).Property("OptionValueID").IsModified = false;
+                            db.Entry(original).Property("TcSetID").IsModified = false;
+                        }
+                        
+
+                        
+                    }
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "SetValues", new { id = ovid1 });
+
+                }
+                return View(setValue);
+             }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.Message;
+                return View("Error");
+            }
+            
+           
         }
 
         // GET: SetValues/Delete/5
