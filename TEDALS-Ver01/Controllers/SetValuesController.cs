@@ -516,7 +516,7 @@ namespace TEDALS_Ver01.Controllers
                     {
 
                         int setid = setValue[i].TcSetID;
-                        if (db.TcSet.FirstOrDefault(x => x.TcSetID == setid).DataFormat.FormatType == "Number" &&setValue[i].Value!="#")
+                        if (db.TcSet.FirstOrDefault(x => x.TcSetID == setid).DataFormat.FormatType == "Number" &&setValue[i].Value!="#" && setValue[i].Value!="?")
                         {
                             double val;
                             if (!double.TryParse(setValue[i].Value, out val))
@@ -525,7 +525,7 @@ namespace TEDALS_Ver01.Controllers
                                 error = true;
                                 Expression<Func<List<SetValue>, string>> exp = x => x[i].Value;
                                 string key = ExpressionHelper.GetExpressionText(exp);
-                                ModelState.AddModelError(key, "Value can only be a number or #");
+                                ModelState.AddModelError(key, "Value can only be a number,# or ?");
                                 int sd = setValue[i].OptionValueID;
                                 var ov = db.OptionValue.Include(x => x.Option).FirstOrDefault(x => x.OptionValueID == sd);
                                 var opid = ov.OptionID;
@@ -569,7 +569,7 @@ namespace TEDALS_Ver01.Controllers
                         double result;
                         double value=0;
                         bool flag = double.TryParse(item.Value, out value);
-                        if(item.Value!="#"&& df.FormatType!="String" )
+                        if(item.Value!="#"&& df.FormatType!="String" && item.Value!="?")
                         {
                             
                             if(precision!=null && value>=0)
@@ -652,7 +652,7 @@ namespace TEDALS_Ver01.Controllers
                 ViewBag.TcSet = q1.SetName;
                 if (setValue == null)
                 {
-                    ViewBag.Error = "The requested  Property does not exist";
+                    ViewBag.Error = "The requested property does not exist";
                     return View("Error");
                 }
                 ViewBag.OptionValueID = new SelectList(db.OptionValue.OrderBy(x=>x.OptionVal), "OptionValueID", "OptionVal", setValue.OptionValueID);
@@ -705,11 +705,11 @@ namespace TEDALS_Ver01.Controllers
                     double value;
                     string valuestring =setValue.Value;
                     bool flag= double.TryParse(setValue.Value,out value);
-                    if(setValue.Value!="#" && data!="String")
+                    if (setValue.Value != "#" && data != "String" && setValue.Value != "?")
                     {
                         if(!flag)
                         {
-                            ModelState.AddModelError("Value", "Value can only be a number or #");
+                            ModelState.AddModelError("Value", "Value can only be a number, # or ?");
                             return View(setValue);
 
                         }
@@ -788,7 +788,7 @@ namespace TEDALS_Ver01.Controllers
                     double value;
                     string valuestring = setValue.Value;
                     bool flag = double.TryParse(setValue.Value, out value);
-                    if (setValue.Value != "#" && data != "String")
+                    if (setValue.Value != "#" && data != "String" && setValue.Value != "?")
                     {
                         if (!flag)
                         {
@@ -906,7 +906,7 @@ namespace TEDALS_Ver01.Controllers
                     for (int i = 0; i < setValue.Count(); i++)
                     {
                         int setid = setValue[i].TcSetID;
-                        if (db.TcSet.FirstOrDefault(x => x.TcSetID == setid).DataFormat.FormatType == "Number" && setValue[i].Value != "#")
+                        if (db.TcSet.FirstOrDefault(x => x.TcSetID == setid).DataFormat.FormatType == "Number" && setValue[i].Value != "#" && setValue[i].Value!="?")
                         {
                             if (!double.TryParse(setValue[i].Value, out val))
                             {
@@ -950,7 +950,7 @@ namespace TEDALS_Ver01.Controllers
                             var scaling = dataformat.ScalingDigits;
                             string valuestring = item.Value.ToString();
                             double value;
-                            if(dataformat.FormatType!="String"&&item.Value!="#")
+                            if(dataformat.FormatType!="String"&&item.Value!="#" && item.Value!="?")
                             {
                                 bool flag = double.TryParse(item.Value, out value);
                                 if (precision != null && value>=0)
