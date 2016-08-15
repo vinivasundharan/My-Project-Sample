@@ -14,7 +14,7 @@ using NCalc;
 using System.Text.RegularExpressions;
 using TEDALS_Ver01.ViewModels.Calculation;
 using TEDALS_Ver01.ViewModels.CalculationVM;
-
+//dgfdgfddfgdfg hjghjg
 namespace TEDALS_Ver01.Controllers
 {
     public class CalculationsController : Controller
@@ -177,7 +177,7 @@ namespace TEDALS_Ver01.Controllers
             return viewmodel;
         }
 
-        //display the available calculations for a system
+        //display the available calculations for a system vgjhfgjfgj
         public ActionResult ViewCalculations(int id)
         {
             try
