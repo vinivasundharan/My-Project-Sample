@@ -230,7 +230,7 @@ namespace TEDALS_Ver01.Controllers
         {
             try
             {
-
+                //dsjkfhsdjfnsajkfdsajfnsa sajkdfsakjfsajkfhs sdyösadf
                 //if (id == null)
                 //{
                 //    ViewBag.Error = "A null parameter was passed to the function";
